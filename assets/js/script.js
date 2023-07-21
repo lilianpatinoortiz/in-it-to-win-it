@@ -1,8 +1,33 @@
-let APIKey = "6f71590911e8c3802b29fe6c49229551";
-var cityName = "Texas";
+let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551"; // feel free to put yours!
+let jobsAPIKey = "bcb287f285mshb6ac2f0478c16f0p127325jsn154ee8e2efdcc"; // feel free to put yours!
+var cityName = "Austin"; // to be input by the user
+var countryCode = "US"; // fixed value, we only want to search for cities in the US
 
-async function weatherApiCall(cityLat, cityLon) {
-  // API call to get the weather of the year from the city selected
+async function jobsApiCall(cityState) {
+  // 3. Api call to get jobs in the given location
+  const url =
+    "https://indeed-jobs-api.p.rapidapi.com/indeed-us/?offset=0&keyword=python&location=" +
+    cityState;
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": jobsAPIKey,
+      "X-RapidAPI-Host": "indeed-jobs-api.p.rapidapi.com",
+    },
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const result = await response.text();
+    console.log("jobsApiCall --------");
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function weatherApiCall(cityLat, cityLon, cityState) {
+  // 2. API call to get the weather of the year from the city selected
   var url =
     "https://archive-api.open-meteo.com/v1/archive?latitude=" +
     cityLat +
@@ -14,18 +39,21 @@ async function weatherApiCall(cityLat, cityLon) {
     const data = await response.json();
     console.log("weatherApiCall --------");
     console.log(data);
+    jobsApiCall(cityState);
   } catch (error) {
     console.error(error);
   }
 }
 
 async function cityApiCall() {
-  // API call to get lat & lon from the city selected
+  // 1. API call to get lat & lon from the city selected
   var url =
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     cityName +
-    "&limit=1&appid=" +
-    APIKey;
+    "," +
+    countryCode +
+    "&limit=10&appid=" +
+    weatherAPIKey;
 
   try {
     const response = await fetch(url);
@@ -34,7 +62,8 @@ async function cityApiCall() {
     console.log(data);
     var cityLat = data[0].lat;
     var cityLon = data[0].lon;
-    weatherApiCall(cityLat, cityLon);
+    var cityState = data[0].state;
+    weatherApiCall(cityLat, cityLon, cityState);
   } catch (error) {
     console.error(error);
   }
