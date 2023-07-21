@@ -5,5 +5,4 @@ APIS TO USE:
 
 https://rapidapi.com/vuesdata/api/indeed-jobs-api/
 
-
-https://openweathermap.org/api/statistics-api
+https://open-meteo.com/en/docs/historical-weather-api
