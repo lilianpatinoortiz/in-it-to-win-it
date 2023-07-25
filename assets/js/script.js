@@ -1,18 +1,24 @@
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551"; // feel free to put yours!
-let jobsAPIKey = "bcb287f285mshb6ac2f0478c16f0p127325jsn154ee8e2efdcc"; // feel free to put yours!
-var cityName = "Austin"; // to be input by the user
-var countryCode = "US"; // fixed value, we only want to search for cities in the US
+let jobsAPIKey = "bcb287f285mshb6ac2f0478c16f0p127325jsn154ee8e2efdc"; // feel free to put yours!
+var countryName = "US";
+var cityName = "Texas"; // to be input by the user
+var query = "Python developer"; // to be input by the user
 
 async function jobsApiCall(cityState) {
   // 3. Api call to get jobs in the given location
   const url =
-    "https://indeed-jobs-api.p.rapidapi.com/indeed-us/?offset=0&keyword=python&location=" +
-    cityState;
+    "https://jsearch.p.rapidapi.com/search?query=" +
+    query +
+    "in%20" +
+    cityName +
+    "%2C%20" +
+    countryName +
+    "&page=1&num_pages=1";
   const options = {
     method: "GET",
     headers: {
       "X-RapidAPI-Key": jobsAPIKey,
-      "X-RapidAPI-Host": "indeed-jobs-api.p.rapidapi.com",
+      "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
     },
   };
 
@@ -51,7 +57,7 @@ async function cityApiCall() {
     "http://api.openweathermap.org/geo/1.0/direct?q=" +
     cityName +
     "," +
-    countryCode +
+    countryName +
     "&limit=10&appid=" +
     weatherAPIKey;
 
