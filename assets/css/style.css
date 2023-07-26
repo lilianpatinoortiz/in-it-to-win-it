@@ -1,22 +1,108 @@
+body {
+  background-color: #193852;
+  font-family: sans-serif;
+  --backgroundBlue: #193852;
+  --lightBlue: #9bdbff;
+  --lightYellow: #ebc137;
+  --scrollbarBG: #193852;
+  --thumbBG: var(--lightYellow);
+}
 header {
-    font-size: 30px;
-    background-color: rgb(238, 204, 141);
+  font-size: 30px;
+  color: white;
+  font-weight: bold;
+  background-color: var(--backgroundBlue);
+  text-align: center;
+  box-shadow: 0px 0px 5px 0px #ffffff9e;
+}
+.subheader {
+  color: white;
+  margin: 20px;
+  text-align: center;
+  font-weight: bold;
 }
 
+.button {
+  font-size: 1rem;
+  background-color: var(--lightYellow);
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  align-items: center;
+}
 section {
-    color: black;
+  color: black;
+}
+
+.input {
+  margin-right: 10px;
+}
+
+div.is-child {
+  padding: 10px;
+}
+section.is-child {
+  padding: 10px;
+}
+
+.body-container {
+  margin: 20px;
+}
+
+.job-summary {
+  max-height: 120px;
+  cursor: pointer;
+
+  > h3 {
+    font-weight: bold;
+  }
+}
+
+.job-summary:hover {
+  max-height: 120px;
+  background-color: #ebc137;
+  cursor: pointer;
 }
 
 .is-child {
-    background-color: grey;
-    border-radius: 0.375em;
-}
-
-#search-bar {
-    background-color: darkgoldenrod;
+  background-color: #f5f5f5;
+  border-radius: 0.375em;
 }
 
 #clicked-job {
-    background-color: orange;
-    border-radius: 0.375em;
+  background-color: #aac4d1;
+  border-radius: 0.375em;
+}
+
+.scroll-allowed {
+  overflow: scroll;
+}
+
+footer {
+  width: 100%;
+  bottom: 0;
+  padding: 20px;
+  text-align: center;
+  background: #13293d0f;
+  color: #e8e8e840;
+  margin-top: auto;
+}
+
+/* Scroll jobs styling */
+.scroll-allowed::-webkit-scrollbar {
+  width: 11px;
+}
+.scroll-allowed {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+.scroll-allowed::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+.scroll-allowed::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
 }
