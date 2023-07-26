@@ -75,4 +75,4 @@ async function cityApiCall() {
   }
 }
 
-cityApiCall();
+//cityApiCall();
