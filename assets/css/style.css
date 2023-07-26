@@ -1,0 +1,22 @@
+header {
+    font-size: 30px;
+    background-color: rgb(238, 204, 141);
+}
+
+section {
+    color: black;
+}
+
+.is-child {
+    background-color: grey;
+    border-radius: 0.375em;
+}
+
+#search-bar {
+    background-color: darkgoldenrod;
+}
+
+#clicked-job {
+    background-color: orange;
+    border-radius: 0.375em;
+}
