@@ -15,36 +15,37 @@
     <div class="container-max-width header">
       <header>Umbrella Job</header>
     </div>
-    <!-- Sub Header -->
-    <div class="container-max-width subheader">
-      <subheader
-        >Seeing the weather before applying to a job with
-        UmbrellaJob!</subheader
-      >
-    </div>
     <!-- Body -->
     <main>
       <div class="body-container">
         <!-- Search Section -->
         <div class="columns">
-          <div class="column tile is-four-quarters" id="search-bar">
+          <div class="column tile is-4">
+            <div class="container-max-width subheader">
+              <subheader
+                >Seeing the weather before applying to a job with
+                UmbrellaJob!</subheader
+              >
+            </div>
+          </div>
+          <div class="column tile is-4" id="search-bar">
             <form id="search-form">
               <input
-                class="input tile is-3"
+                class="input tile is-6"
                 type="text"
                 placeholder="Keyword..."
               />
               <input
-                class="input tile is-3"
+                class="input tile is-6"
                 type="text"
                 placeholder="City..."
               />
               <input
-                class="input tile is-3"
+                class="input tile is-6"
                 type="text"
                 placeholder="Country..."
               />
-              <button class="button is-small">Search</button>
+              <button class="button">Search</button>
             </form>
           </div>
         </div>
@@ -52,7 +53,10 @@
         <div class="tile is-ancestor">
           <!-- Jobs List Section -->
           <section class="tile is-4 is-vertical">
-            <div class="tile is-parent is-vertical" id="new-jobs">
+            <div
+              class="tile is-parent is-vertical scroll-allowed"
+              id="new-jobs"
+            >
               <div class="tile is-child job-summary">
                 <h3>Company 1</h3>
                 <ul>
@@ -111,6 +115,30 @@
               </div>
               <div class="tile is-child job-summary">
                 <h3>Company 7</h3>
+                <ul>
+                  <li>salary:</li>
+                  <li>location:</li>
+                  <li>role:</li>
+                </ul>
+              </div>
+              <div class="tile is-child job-summary">
+                <h3>Company 8</h3>
+                <ul>
+                  <li>salary:</li>
+                  <li>location:</li>
+                  <li>role:</li>
+                </ul>
+              </div>
+              <div class="tile is-child job-summary">
+                <h3>Company 9</h3>
+                <ul>
+                  <li>salary:</li>
+                  <li>location:</li>
+                  <li>role:</li>
+                </ul>
+              </div>
+              <div class="tile is-child job-summary">
+                <h3>Company 10</h3>
                 <ul>
                   <li>salary:</li>
                   <li>location:</li>
@@ -216,8 +244,8 @@
     <!-- Footer -->
     <footer>
       <h3>
-        All contents of this site, unless otherwise noted, are ©2023 Lilian
-        Patino Ortiz
+        All contents of this site, unless otherwise noted, are ©2023
+        In-it-to-win-it
       </h3>
     </footer>
     <!-- Added link to the jQuery library and styling -->
