@@ -12,8 +12,8 @@ function handleSearchFormSubmit(event) {
     return;
   }
 
-  var locQueryUrl = "./index.html?q=" + searchInputVal;
-  console.log(locQueryUrl);
+  var locQueryUrl =
+    "./index.html?q=" + keywordInput + "-" + cityInput + "-" + countryInput;
   document.location.href = locQueryUrl;
 }
 
