@@ -11,9 +11,15 @@ header {
   font-size: 30px;
   color: white;
   font-weight: bold;
-  background-color: var(--backgroundBlue);
+  background-color: rgb(230, 208, 149);
   text-align: center;
   box-shadow: 0px 0px 5px 0px #ffffff9e;
+}
+img.logo {
+  margin-top: -5%;
+  margin-left: -10%;
+  width: 25%;
+  transform: translateX(-650px);
 }
 .subheader {
   color: white;
