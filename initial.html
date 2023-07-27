@@ -9,6 +9,7 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
     <link rel="stylesheet" href="./assets/css/style.css" />
+ 
   </head>
   <body>
     <!-- Header -->
@@ -19,11 +20,11 @@
     <main>
       <div id="container">
         <div id="logo"></div>
-        <div id="search-bar" class="column tile is-4">
-          <form id="search-form">
+        <div id="search-bar" class="column tile is- 20">
+          <form id="search-form" class="px-1">
             <input
               id="keyword-input"
-              class="input tile is-6"
+              class="input tile is-6 "
               type="text"
               placeholder="Keyword..."
             />
@@ -39,10 +40,14 @@
               type="text"
               placeholder="Country..."
             />
-            <button id="search-button" class="button">Search</button>
+            <button id="search-button" class="button" class="button is-large"> Search</button>
           </form>
         </div>
-        <div id="search-image"></div>
+      
+      </div>
+      <div id="search-image">
+        <img src="assets/css/backgroundImage.jpg" alt="people searching for job">
+
       </div>
     </main>
     <script src="./assets/js/initial-script.js"></script>

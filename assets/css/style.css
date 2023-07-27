@@ -35,7 +35,9 @@ form {
 section {
   color: black;
 }
-
+/* #search-bar{
+justify-content: center;
+} */
 .input {
   margin-right: 10px;
 }
