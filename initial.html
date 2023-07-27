@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Umbrella Job</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="container-max-width header">
+      <header>Umbrella Job</header>
+    </div>
+    <!-- Body -->
+    <main>
+      <div id="container">
+        <div id="logo"></div>
+        <div id="search-bar" class="column tile is-4">
+          <form id="search-form">
+            <input
+              id="keyword-input"
+              class="input tile is-6"
+              type="text"
+              placeholder="Keyword..."
+            />
+            <input
+              id="city-input"
+              class="input tile is-6"
+              type="text"
+              placeholder="City..."
+            />
+            <input
+              id="country-input"
+              class="input tile is-6"
+              type="text"
+              placeholder="Country..."
+            />
+            <button id="search-button" class="button">Search</button>
+          </form>
+        </div>
+        <div id="search-image"></div>
+      </div>
+    </main>
+    <script src="./assets/js/initial-script.js"></script>
+  </body>
+</html>
