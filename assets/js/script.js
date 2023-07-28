@@ -87,48 +87,50 @@ function getParams() {
   cityApiCall();
 }
 
-//searched job context 
-var jobLiEl = document.querySelector('#new-jobs');
+//searched job context
+var jobLiEl = document.querySelector("#new-jobs");
 
-function jobListInformation(result) { 
-    for (i = 0; i < result.length; i++) {
-      const newJobs = document.createElement('div');
-      const compName = document.createElement('h3');
-      const jobTitle = document.createElement('li');
-      const salary = document.createElement('li');
-      const type = document.createElement('li');
-    
-      if (result[i].employer_name === null) {
-        compName.textContent = "N/A";
-      } else {
-      compName.textContent = result[i].employer_name};
+function jobListInformation(result) {
+  for (i = 0; i < result.length; i++) {
+    const newJobs = document.createElement("div");
+    const compName = document.createElement("h3");
+    const jobTitle = document.createElement("li");
+    const salary = document.createElement("li");
+    const type = document.createElement("li");
 
-      if (result[i].job_title === null) {
-        jobTitle.textContent = "Unknown";
-      } else {
-      jobTitle.textContent = "Title: " + result[i].job_title};
-
-      if (result[i].job_min_salary === null) {
-        salary.textContent = "Salary: Negotiable";
-      } else {
-      salary.textContent = "Salary: " + result[i].job_min_salary};
-
-      if (result[i].job_employment_type === null) {
-        type.textContent = "N/A";
-      } else  {
-        type.textContent = "Type: " + result[i].job_employment_type};
-
-      newJobs.className="tile is-child job-summary";
-      compName.className="is-underlined";
-      
-      jobLiEl.appendChild(newJobs);
-      newJobs.appendChild(compName);
-      newJobs.appendChild(jobTitle);
-      newJobs.appendChild(salary);
-      newJobs.appendChild(type);
+    if (result[i].employer_name === null) {
+      compName.textContent = "N/A";
+    } else {
+      compName.textContent = result[i].employer_name;
     }
-  
+
+    if (result[i].job_title === null) {
+      jobTitle.textContent = "Unknown";
+    } else {
+      jobTitle.textContent = "Title: " + result[i].job_title;
+    }
+
+    if (result[i].job_min_salary === null) {
+      salary.textContent = "Salary: Negotiable";
+    } else {
+      salary.textContent = "Salary: " + result[i].job_min_salary;
+    }
+
+    if (result[i].job_employment_type === null) {
+      type.textContent = "N/A";
+    } else {
+      type.textContent = "Type: " + result[i].job_employment_type;
+    }
+
+    newJobs.className = "tile is-child job-summary";
+    compName.className = "is-underlined";
+
+    jobLiEl.appendChild(newJobs);
+    newJobs.appendChild(compName);
+    newJobs.appendChild(jobTitle);
+    newJobs.appendChild(salary);
+    newJobs.appendChild(type);
+  }
 }
 
-cityApiCall();
 getParams();
