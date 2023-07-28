@@ -1,7 +1,8 @@
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551"; // feel free to put yours!
 let jobsAPIKey = "991596ba1amsh552f7f85c7ca672p17b652jsn773224bb2532"; // feel free to put yours!
-let endDate = dayjs().format("YYYY-MM-DD");
+
 let startDate = dayjs().subtract(1, "years").format("YYYY-MM-DD");
+let endDate = dayjs().format("YYYY-MM-DD");
 
 var searchButtonElement = document.querySelector(".button");
 var keywordElement = document.querySelector("#keyword-input");
@@ -43,7 +44,7 @@ async function weatherApiCall(cityLat, cityLon, cityState) {
     cityLat +
     "&longitude=" +
     cityLon +
-    "&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,rain_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max&temperature_unit=fahrenheit&windspeed_unit=ms&timezone=America%2FLos_Angeles" +
+    "&hourly=temperature_2m&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,rain_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max&temperature_unit=fahrenheit&windspeed_unit=ms&timezone=America%2FLos_Angeles" +
     "&start_date=" +
     startDate +
     "&end_date=" +
@@ -51,8 +52,42 @@ async function weatherApiCall(cityLat, cityLon, cityState) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log("weatherApiCall --------");
-    console.log(data);
+    if (data) {
+      var allData = data.daily;
+      var ourData = {};
+      var springData = {};
+      var summerData = {};
+      var fallData = {};
+      var winterData = {};
+
+      function average(array) {
+        // get average in array of numbers
+        return array.reduce((x, y) => x + y) / array.length;
+      }
+
+      // for each attribute, we split the year in 4 and assign the corresponding values
+      for (var key in allData) {
+        if (key != "sunrise" && key != "sunset") {
+          springData[key] = average(allData[key].slice(0, 93)); // spring lasts 93 days - we take the average for rain, snow, temp and wind
+          summerData[key] = average(allData[key].slice(94, 186)); // summer lasts 93 days - we take the average rain, snow, temp and wind
+          fallData[key] = average(allData[key].slice(187, 277)); // fall lasts 90 days - we take the average rain, snow, temp and wind
+          winterData[key] = average(allData[key].slice(278, 365)); // winter lasts 88 days - we take the average rain, snow, temp and wind
+        } else {
+          springData[key] = allData[key].slice(0, 93)[38].split("T")[1]; // spring lasts 93 days - we take the middle value
+          summerData[key] = allData[key].slice(94, 186)[38].split("T")[1]; // summer lasts 93 days - we take the middle value
+          fallData[key] = allData[key].slice(187, 277)[38].split("T")[1]; // fall lasts 90 days - we take the middle value
+          winterData[key] = allData[key].slice(278, 365)[38].split("T")[1]; // winter lasts 88 days - we take the middle value
+        }
+      }
+      ourData.spring = springData;
+      ourData.summer = summerData;
+      ourData.fall = fallData;
+      ourData.winter = winterData;
+
+      console.log(ourData);
+    } else {
+      console.log("Unable to get the weather");
+    }
     // jobsApiCall(cityState);
   } catch (error) {
     console.error(error);
@@ -72,10 +107,14 @@ async function cityApiCall() {
     const data = await response.json();
     console.log("cityApiCall --------");
     console.log(data);
-    var cityLat = data[0].lat;
-    var cityLon = data[0].lon;
-    var cityState = data[0].state;
-    weatherApiCall(cityLat, cityLon, cityState);
+    if (data[0]) {
+      var cityLat = data[0].lat;
+      var cityLon = data[0].lon;
+      var cityState = data[0].state;
+      weatherApiCall(cityLat, cityLon, cityState);
+    } else {
+      console.log("Unable to get the lat and lon");
+    }
   } catch (error) {
     console.error(error);
   }
