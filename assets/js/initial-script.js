@@ -3,17 +3,16 @@ var searchFormEl = document.querySelector("#search-form");
 function handleSearchFormSubmit(event) {
   event.preventDefault();
 
-  var keywordInput = document.querySelector("#keyword-input").value;
-  var cityInput = document.querySelector("#city-input").value;
-  var countryInput = document.querySelector("#country-input").value;
+  var keywordString = document.querySelector("#keyword-input").value;
+  var locationString = document.querySelector("#city-input").value;
 
-  if (!keywordInput || !cityInput || !countryInput) {
+  if (!keywordString || !locationString) {
     console.error("You need a search input value!");
     return;
   }
 
   var locQueryUrl =
-    "./index.html?q=" + keywordInput + "-" + cityInput + "-" + countryInput;
+    "./index.html?keyword=" + keywordString + "&location=" + locationString;
   document.location.href = locQueryUrl;
 }
 
