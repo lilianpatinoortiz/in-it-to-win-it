@@ -1,8 +1,11 @@
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551"; // feel free to put yours!
 let jobsAPIKey = "bcb287f285mshb6ac2f0478c16f0p127325jsn154ee8e2efdc"; // feel free to put yours!
+let endDate = dayjs().format("YYYY-MM-DD");
+let startDate = dayjs().subtract(1, "years").format("YYYY-MM-DD");
+
 var countryName = "US";
-var cityName = "Texas"; // to be input by the user
-var query = "Python developer"; // to be input by the user
+var cityName = "Texas";
+var query = "Python developer";
 
 async function jobsApiCall(cityState) {
   // 3. Api call to get jobs in the given location
@@ -39,13 +42,17 @@ async function weatherApiCall(cityLat, cityLon, cityState) {
     cityLat +
     "&longitude=" +
     cityLon +
-    "&start_date=2022-07-20&end_date=2023-07-20&daily=rain_sum,snowfall_sum&timezone=America%2FLos_Angeles";
+    "&hourly=temperature_2m&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,rain_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max&temperature_unit=fahrenheit&windspeed_unit=ms&timezone=America%2FLos_Angeles" +
+    "&start_date=" +
+    startDate +
+    "&end_date=" +
+    endDate;
   try {
     const response = await fetch(url);
     const data = await response.json();
     console.log("weatherApiCall --------");
     console.log(data);
-    jobsApiCall(cityState);
+    //jobsApiCall(cityState);
   } catch (error) {
     console.error(error);
   }
@@ -75,4 +82,4 @@ async function cityApiCall() {
   }
 }
 
-//cityApiCall();
+cityApiCall();
