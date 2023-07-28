@@ -8,13 +8,32 @@ body {
   --thumbBG: var(--lightYellow);
 }
 header {
-  font-size: 30px;
-  color: white;
+  /* font-size: 30px;
+  color: white; */
+  padding-top: 0%;
   font-weight: bold;
-  background-color: var(--backgroundBlue);
+  background-color: rgb(230, 208, 149);
+  /* background-color:#FAF9F6; */
+
   text-align: center;
   box-shadow: 0px 0px 5px 0px #ffffff9e;
 }
+img.logo {
+
+  padding-top: 0px;
+  padding-bottom: 0px;
+  justify-content: center;
+}
+.backgroundImage{
+  background-size:cover;
+
+}
+#search-form{
+ 
+    margin-left: 25%;
+    margin-right: 45%;
+}
+
 .subheader {
   color: white;
   margin: 20px;
@@ -35,7 +54,10 @@ form {
 section {
   color: black;
 }
+.body-container{
+justify-content: center;
 
+}
 .input {
   margin-right: 10px;
 }
@@ -58,6 +80,14 @@ section.is-child {
   > h3 {
     font-weight: bold;
   }
+  > li {
+    list-style-type: none;
+    font-size: small;
+  }
+}
+
+.job-summary h3 {
+  font-weight: bold;
 }
 
 .job-summary:hover {
