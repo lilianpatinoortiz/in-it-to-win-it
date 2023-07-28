@@ -1,9 +1,9 @@
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551"; // feel free to put yours!
-let jobsAPIKey = "bcb287f285mshb6ac2f0478c16f0p127325jsn154ee8e2efdc"; // feel free to put yours!
+let jobsAPIKey = "991596ba1amsh552f7f85c7ca672p17b652jsn773224bb2532"; // feel free to put yours!
+
 var searchButtonElement = document.querySelector(".button");
 var keywordElement = document.querySelector("#keyword-input");
 var locationElement = document.querySelector("#location-input");
-
 var keywordValue;
 var locationValue;
 
@@ -25,9 +25,10 @@ async function jobsApiCall(cityState) {
 
   try {
     const response = await fetch(url, options);
-    const result = await response.text();
+    const result = await response.json();
     console.log("jobsApiCall --------");
     console.log(result);
+    jobListInformation(result.data);
   } catch (error) {
     console.error(error);
   }
@@ -46,7 +47,7 @@ async function weatherApiCall(cityLat, cityLon, cityState) {
     const data = await response.json();
     console.log("weatherApiCall --------");
     console.log(data);
-    //jobsApiCall(cityState);
+    jobsApiCall(cityState);
   } catch (error) {
     console.error(error);
   }
@@ -86,21 +87,48 @@ function getParams() {
   cityApiCall();
 }
 
-var searchFormEl = document.querySelector("#search-form");
+//searched job context 
+var jobLiEl = document.querySelector('#new-jobs');
 
-function handleSearchFormSubmit(event) {
-  event.preventDefault();
-  keywordValue = document.querySelector("#keyword-input").value;
-  locationValue = document.querySelector("#location-input").value;
-  if (!keywordValue || !locationValue) {
-    console.error("You need a search input value!");
-    return;
-  }
-  var locQueryUrl =
-    "./index.html?keyword=" + keywordValue + "&location=" + locationValue;
-  document.location.href = locQueryUrl;
+function jobListInformation(result) { 
+    for (i = 0; i < result.length; i++) {
+      const newJobs = document.createElement('div');
+      const compName = document.createElement('h3');
+      const jobTitle = document.createElement('li');
+      const salary = document.createElement('li');
+      const type = document.createElement('li');
+    
+      if (result[i].employer_name === null) {
+        compName.textContent = "N/A";
+      } else {
+      compName.textContent = result[i].employer_name};
+
+      if (result[i].job_title === null) {
+        jobTitle.textContent = "Unknown";
+      } else {
+      jobTitle.textContent = "Title: " + result[i].job_title};
+
+      if (result[i].job_min_salary === null) {
+        salary.textContent = "Salary: Negotiable";
+      } else {
+      salary.textContent = "Salary: " + result[i].job_min_salary};
+
+      if (result[i].job_employment_type === null) {
+        type.textContent = "N/A";
+      } else  {
+        type.textContent = "Type: " + result[i].job_employment_type};
+
+      newJobs.className="tile is-child job-summary";
+      compName.className="is-underlined";
+      
+      jobLiEl.appendChild(newJobs);
+      newJobs.appendChild(compName);
+      newJobs.appendChild(jobTitle);
+      newJobs.appendChild(salary);
+      newJobs.appendChild(type);
+    }
+  
 }
 
-searchButtonElement.addEventListener("submit", handleSearchFormSubmit);
-
+cityApiCall();
 getParams();

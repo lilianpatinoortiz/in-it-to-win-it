@@ -80,6 +80,14 @@ section.is-child {
   > h3 {
     font-weight: bold;
   }
+  > li {
+    list-style-type: none;
+    font-size: small;
+  }
+}
+
+.job-summary h3 {
+  font-weight: bold;
 }
 
 .job-summary:hover {
