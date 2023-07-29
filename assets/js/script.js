@@ -257,22 +257,14 @@ function displayWeatherinUI(result) {
       wmo[result[key].weathercode.toFixed()];
 
     // rain
-    var rainTextIntensity = "";
-    if (result[key].rain_sum.toFixed() <= 0) {
-      rainTextIntensity = "Low rain";
-    } else if (result[key].rain_sum.toFixed() <= 20) {
-      rainTextIntensity = "Moderate rain";
-    } else {
-      rainTextIntensity = "High rain";
-    }
     seasonDiv.querySelector("#rain").textContent =
-      result[key].rain_sum.toFixed() + " mm - " + rainTextIntensity;
+      result[key].rain_sum.toFixed() + " mm - " + "rain warning";
     // snow
     seasonDiv.querySelector("#snow").textContent =
-      result[key].snowfall_sum.toFixed(1) + " cm - " + "Snow warning";
+      result[key].snowfall_sum.toFixed(1) + " cm - " + "snow warning";
     // wind
     seasonDiv.querySelector("#wind").textContent =
-      result[key].windspeed_10m_max.toFixed(2) + " m/s";
+      result[key].windspeed_10m_max.toFixed(2) + " m/s - " + "wind warning";
 
     // sunrise and sunset
     const xValues = [sunrise, sunset];
