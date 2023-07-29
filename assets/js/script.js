@@ -185,8 +185,9 @@ function displayWeatherinUI(result) {
     seasonDiv.querySelector("#temperature").textContent =
       result[key].temperature_2m_max.toFixed(2) + " ℉";
     // wmo (weather) - TO BE DONE
+    //seasonDiv.querySelector("#wmo-code").textContent = wmo[result[key].weathercode.toFixed()];
     seasonDiv.querySelector("#wmo-code").textContent =
-      wmo[result[key].weathercode.toFixed()];
+      "weather descritpion here";
     // rain
     var rainTextIntensity = "";
     if (result[key].rain_sum.toFixed() <= 0) {
@@ -212,6 +213,9 @@ function displayWeatherinUI(result) {
     // wind
     seasonDiv.querySelector("#wind").textContent =
       result[key].windspeed_10m_max.toFixed(2) + " m/s";
+
+    // sunrise and sunset
+    const xValues = [sunrise, sunset];
   }
 }
 

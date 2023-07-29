@@ -155,3 +155,10 @@ footer {
   display: flex;
   padding-bottom: 10px;
 }
+#wmo-code {
+  margin-bottom: 10px;
+  width: 200px;
+  background-color: #00d1b269;
+  border-radius: 15px;
+  text-align: center;
+}
