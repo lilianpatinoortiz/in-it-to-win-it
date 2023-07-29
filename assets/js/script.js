@@ -1,14 +1,33 @@
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551"; // feel free to put yours!
 let jobsAPIKey = "991596ba1amsh552f7f85c7ca672p17b652jsn773224bb2532"; // feel free to put yours!
-
-let startDate = dayjs().subtract(1, "years").format("YYYY-MM-DD");
-let endDate = dayjs().format("YYYY-MM-DD");
+let currentYear = dayjs().year();
+let endDateNotFormatted = new Date(currentYear, 0, 1);
+let endDate = endDateNotFormatted.toISOString().split("T")[0];
+let startDate = subtractYears(endDateNotFormatted, 1)
+  .toISOString()
+  .split("T")[0];
+let firstDayOfSpring = 80;
+let lastDayOfSpring = 173;
+let firstDayOfSummer = 174;
+let lastDayOfSummer = 267;
+let firstDayOfFall = 268;
+let lastDayOfFall = 357;
+let firstDayOfWinter = 358;
+let lastDayOfWinter = 365;
+let firstDayOfWinterOfYear = 0;
+let lastDayOfWinterOfYear = 79;
 
 var searchButtonElement = document.querySelector(".button");
 var keywordElement = document.querySelector("#keyword-input");
 var locationElement = document.querySelector("#location-input");
 var keywordValue;
 var locationValue;
+
+function subtractYears(date, years) {
+  const dateCopy = new Date(date);
+  dateCopy.setFullYear(date.getFullYear() - years);
+  return dateCopy;
+}
 
 async function jobsApiCall(cityState) {
   // 3. Api call to get jobs in the given location
@@ -65,18 +84,67 @@ async function weatherApiCall(cityLat, cityLon, cityState) {
         return array.reduce((x, y) => x + y) / array.length;
       }
 
-      // for each attribute, we split the year in 4 and assign the corresponding values
       for (var key in allData) {
         if (key != "sunrise" && key != "sunset") {
-          springData[key] = average(allData[key].slice(0, 93)); // spring lasts 93 days - we take the average for rain, snow, temp and wind
-          summerData[key] = average(allData[key].slice(94, 186)); // summer lasts 93 days - we take the average rain, snow, temp and wind
-          fallData[key] = average(allData[key].slice(187, 277)); // fall lasts 90 days - we take the average rain, snow, temp and wind
-          winterData[key] = average(allData[key].slice(278, 365)); // winter lasts 88 days - we take the average rain, snow, temp and wind
+          if (key != "temperature_2m_max") {
+            springData[key] = Math.max.apply(
+              Math,
+              allData[key].slice(firstDayOfSpring, lastDayOfSpring)
+            ); // spring lasts 93 days - we take the average for rain, snow, temp and wind
+            summerData[key] = Math.max.apply(
+              Math,
+              allData[key].slice(firstDayOfSummer, lastDayOfSummer)
+            ); // summer lasts 93 days - we take the average rain, snow, temp and wind
+            fallData[key] = Math.max.apply(
+              Math,
+              allData[key].slice(firstDayOfFall, lastDayOfFall)
+            ); // fall lasts 90 days - we take the average rain, snow, temp and wind
+            var winterArray = allData[key]
+              .slice(firstDayOfWinter, lastDayOfWinter)
+              .concat(
+                allData[key].slice(
+                  firstDayOfWinterOfYear,
+                  lastDayOfWinterOfYear
+                )
+              );
+            winterData[key] = Math.max.apply(Math, winterArray);
+            // winter lasts 88 days - we take the average rain, snow, temp and wind
+          } else {
+            springData[key] = average(
+              allData[key].slice(firstDayOfSpring, lastDayOfSpring)
+            ); // spring lasts 93 days - we take the average for rain, snow, temp and wind
+            summerData[key] = average(
+              allData[key].slice(firstDayOfSummer, lastDayOfSummer)
+            ); // summer lasts 93 days - we take the average rain, snow, temp and wind
+            fallData[key] = average(
+              allData[key].slice(firstDayOfFall, lastDayOfFall)
+            ); // fall lasts 90 days - we take the average rain, snow, temp and wind
+            var winterArray = allData[key]
+              .slice(firstDayOfWinter, lastDayOfWinter)
+              .concat(
+                allData[key].slice(
+                  firstDayOfWinterOfYear,
+                  lastDayOfWinterOfYear
+                )
+              );
+            winterData[key] = average(winterArray); // winter lasts 88 days - we take the average rain, snow, temp and wind
+          }
         } else {
-          springData[key] = allData[key].slice(0, 93)[38].split("T")[1]; // spring lasts 93 days - we take the middle value
-          summerData[key] = allData[key].slice(94, 186)[38].split("T")[1]; // summer lasts 93 days - we take the middle value
-          fallData[key] = allData[key].slice(187, 277)[38].split("T")[1]; // fall lasts 90 days - we take the middle value
-          winterData[key] = allData[key].slice(278, 365)[38].split("T")[1]; // winter lasts 88 days - we take the middle value
+          springData[key] = allData[key]
+            .slice(firstDayOfSpring, lastDayOfSpring)[38]
+            .split("T")[1]; // spring lasts 93 days - we take the middle value
+          summerData[key] = allData[key]
+            .slice(firstDayOfSummer, lastDayOfSummer)[38]
+            .split("T")[1]; // summer lasts 93 days - we take the middle value
+          fallData[key] = allData[key]
+            .slice(firstDayOfFall, lastDayOfFall)[38]
+            .split("T")[1]; // fall lasts 90 days - we take the middle value
+          var winterArray = allData[key]
+            .slice(firstDayOfWinter, lastDayOfWinter)
+            .concat(
+              allData[key].slice(firstDayOfWinterOfYear, lastDayOfWinterOfYear)
+            );
+          winterData[key] = winterArray[38].split("T")[1]; // winter lasts 88 days - we take the middle value
         }
       }
       ourData.spring = springData;
@@ -200,16 +268,8 @@ function displayWeatherinUI(result) {
     seasonDiv.querySelector("#rain").textContent =
       result[key].rain_sum.toFixed() + " mm - " + rainTextIntensity;
     // snow
-    var snowTextIntensity = "";
-    if (result[key].snowfall_sum.toFixed() <= 5) {
-      snowTextIntensity = "Low Snow Warning";
-    } else if (result[key].snowfall_sum.toFixed() <= 18) {
-      snowTextIntensity = "Moderate Snow Warning";
-    } else {
-      snowTextIntensity = "Heavy Snow Warning";
-    }
     seasonDiv.querySelector("#snow").textContent =
-      result[key].snowfall_sum.toFixed(1) + " cm - " + snowTextIntensity;
+      result[key].snowfall_sum.toFixed(1) + " cm - " + "Snow warning";
     // wind
     seasonDiv.querySelector("#wind").textContent =
       result[key].windspeed_10m_max.toFixed(2) + " m/s";
