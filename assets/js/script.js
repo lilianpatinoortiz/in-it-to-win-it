@@ -1,11 +1,16 @@
+
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551"; // feel free to put yours!
-let jobsAPIKey = "991596ba1amsh552f7f85c7ca672p17b652jsn773224bb2532"; // feel free to put yours!
+let jobsAPIKey = "991596ba1amsh552f7f85c7ca672p17b652jsn773224bb2532";  // old key 
+// let jobsAPIKey = "cff46117admsh3bff66b81994c8ep12d733jsn4c20d3297f0a"; // new key is not working
+
 
 var searchButtonElement = document.querySelector(".button");
 var keywordElement = document.querySelector("#keyword-input");
 var locationElement = document.querySelector("#location-input");
 var keywordValue;
 var locationValue;
+
+
 
 async function jobsApiCall(cityState) {
   // 3. Api call to get jobs in the given location
@@ -74,6 +79,7 @@ async function cityApiCall() {
     console.error(error);
   }
 }
+
 function getParams() {
   const urlParams = new URLSearchParams(window.location.search);
   const keywordString = urlParams.get("keyword");
@@ -86,6 +92,32 @@ function getParams() {
   locationValue = locationString;
   cityApiCall();
 }
+
+//  // Wait for the DOM to be fully loaded before running the JavaScript code
+// document.addEventListener("DOMContentLoaded", function () {
+//   // Get a reference to the search form element
+//   const searchForm = document.getElementById("search-form");
+
+//   // Add an event listener to the search form
+//   searchForm.addEventListener("submit", function (event) {
+//     event.preventDefault();
+
+//     // Get the values entered in the keyword and location input fields
+//     var keyword = document.getElementById("keyword-input").value.trim();
+//     var location = document.getElementById("location-input").value.trim();
+
+//     // Check if either keyword or location is empty
+//     if (!keyword || !location) {
+//       console.error("You need a keyword and a location for the search!");
+//       return;
+//     }
+//       // Clear the previous job listings
+//   // jobLiEl.innerHTML = "";
+//     // Perform the job search with the entered keyword and location
+//     getParams(keyword, location);
+
+//   });
+// });
 
 //searched job context
 var jobLiEl = document.querySelector("#new-jobs");
@@ -132,5 +164,4 @@ function jobListInformation(result) {
     newJobs.appendChild(type);
   }
 }
-
 getParams();
