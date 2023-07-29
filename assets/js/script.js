@@ -83,8 +83,7 @@ async function weatherApiCall(cityLat, cityLon, cityState) {
       ourData.summer = summerData;
       ourData.fall = fallData;
       ourData.winter = winterData;
-
-      console.log(ourData);
+      displayWeatherinUI(ourData);
     } else {
       console.log("Unable to get the weather");
     }
@@ -178,4 +177,73 @@ function jobListInformation(result) {
   }
 }
 
+function displayWeatherinUI(result) {
+  console.log(result);
+  for (var key in result) {
+    // temperature
+    var seasonDiv = document.querySelector("#weather-" + key);
+    seasonDiv.querySelector("#temperature").textContent =
+      result[key].temperature_2m_max.toFixed(2) + " ℉";
+    // wmo (weather) - TO BE DONE
+    seasonDiv.querySelector("#wmo-code").textContent =
+      wmo[result[key].weathercode.toFixed()];
+    // rain
+    var rainTextIntensity = "";
+    if (result[key].rain_sum.toFixed() <= 0) {
+      rainTextIntensity = "Low rain";
+    } else if (result[key].rain_sum.toFixed() <= 20) {
+      rainTextIntensity = "Moderate rain";
+    } else {
+      rainTextIntensity = "High rain";
+    }
+    seasonDiv.querySelector("#rain").textContent =
+      result[key].rain_sum.toFixed() + " mm - " + rainTextIntensity;
+    // snow
+    var snowTextIntensity = "";
+    if (result[key].snowfall_sum.toFixed() <= 5) {
+      snowTextIntensity = "Low Snow Warning";
+    } else if (result[key].snowfall_sum.toFixed() <= 18) {
+      snowTextIntensity = "Moderate Snow Warning";
+    } else {
+      snowTextIntensity = "Heavy Snow Warning";
+    }
+    seasonDiv.querySelector("#snow").textContent =
+      result[key].snowfall_sum.toFixed(1) + " cm - " + snowTextIntensity;
+    // wind
+    seasonDiv.querySelector("#wind").textContent =
+      result[key].windspeed_10m_max.toFixed(2) + " m/s";
+  }
+}
+
 getParams();
+
+var wmo = {
+  0: "Clear sky",
+  1: "Mainly clear",
+  2: "Partly cloudy",
+  3: "Overcast",
+  45: "Fog and depositing rime fog",
+  48: "Fog and depositing rime fog",
+  51: "Drizzle: Light",
+  53: "Drizzle: moderate",
+  55: "Dense drizzle",
+  56: "Light freezing drizzle",
+  57: "Dense freezing drizzle",
+  61: "Slight rain",
+  63: "Moderate rain",
+  65: "High rain",
+  66: "Light freezing rain",
+  67: "Heavy freezing rain",
+  71: "Slight snow",
+  73: "Moderate snow",
+  75: "Heavy snow",
+  77: "Snow grains",
+  80: "Slight rain showers",
+  81: "Moderate rain showers",
+  82: "Violent rain showers",
+  85: "Snow showers slight and heavy",
+  86: "Snow showers slight and heavy",
+  95: "Thunderstorm: Slight or moderate",
+  96: "Thunderstorm with slight and heavy hail",
+  99: "Thunderstorm with slight and heavy hail",
+};
