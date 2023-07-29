@@ -93,31 +93,31 @@ function getParams() {
   cityApiCall();
 }
 
-//  // Wait for the DOM to be fully loaded before running the JavaScript code
-// document.addEventListener("DOMContentLoaded", function () {
-//   // Get a reference to the search form element
-//   const searchForm = document.getElementById("search-form");
+ // Wait for the DOM to be fully loaded before running the JavaScript code
+document.addEventListener("DOMContentLoaded", function () {
+  // Get a reference to the search form element
+  const searchForm = document.getElementById("search-form");
 
-//   // Add an event listener to the search form
-//   searchForm.addEventListener("submit", function (event) {
-//     event.preventDefault();
+  // Add an event listener to the search form
+  searchForm.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-//     // Get the values entered in the keyword and location input fields
-//     var keyword = document.getElementById("keyword-input").value.trim();
-//     var location = document.getElementById("location-input").value.trim();
+    // Get the values entered in the keyword and location input fields
+    var keyword = document.getElementById("keyword-input").value.trim();
+    var location = document.getElementById("location-input").value.trim();
 
-//     // Check if either keyword or location is empty
-//     if (!keyword || !location) {
-//       console.error("You need a keyword and a location for the search!");
-//       return;
-//     }
-//       // Clear the previous job listings
-//   // jobLiEl.innerHTML = "";
-//     // Perform the job search with the entered keyword and location
-//     getParams(keyword, location);
+    // Check if either keyword or location is empty
+    if (!keyword || !location) {
+      console.error("You need a keyword and a location for the search!");
+      return;
+    }
+      // Clear the previous job listings
+  // jobLiEl.innerHTML = "";
+    // Perform the job search with the entered keyword and location
+    getParams(keyword, location);
 
-//   });
-// });
+  });
+});
 
 //searched job context
 var jobLiEl = document.querySelector("#new-jobs");
