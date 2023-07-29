@@ -1,59 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Umbrella Job</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
-    <link rel="stylesheet" href="./assets/css/style.css" />
- 
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="assets/css/initial.css" />
   </head>
   <body>
-    <!-- Header -->
-    <!-- <div class="container-max-width header">
-      <header>Umbrella Job</header>
-    </div> -->
-    <!-- Header -->
-    <div class="container-max-width header">
-      <header><img src="assets/images/logo.png" class="logo" /></header>
-    </div>
-    <!-- Body -->
-    <main>
-      <div id="container">
-        <div id="logo"></div>
-        <div id="search-bar" class="column tile is- 4">
-          <form id="search-form" class="px-1">
-            <input
-              id="keyword-input"
-              class="input tile is-6 "
-              type="text"
-              placeholder="Keyword..."
-            />
-            <input
-              id="city-input"
-              class="input tile is-6"
-              type="text"
-              placeholder="City..."
-            />
-            <input
-              id="country-input"
-              class="input tile is-6"
-              type="text"
-              placeholder="Country..."
-            />
-            <button id="search-button" class="button" > Search</button>
-          </form>
-        </div>
-      
-      </div>
-      <div id="search-image">
-        <img src="assets/images/backgroundImage.jpg" alt="people searching for job" class="backgroundImage">
+    <header class="frontpage-container">
+      <img src="assets/images/logo.png" id="logo" />
+    </header>
+    <section class="navbar">
+      <button class="button">Search</button>
+      <p class="inputcontainer-job">
+        <input type="text" id="Job-input" placeholder="Keyword, Job title..." />
+      </p>
+      <p class="inputcontainer-city">
+        <input
+          type="text"
+          id="city-input"
+          placeholder="Country, State, City, or Remote.."
+        />
+      </p>
+    </section>
 
-      </div>
-    </main>
-    <script src="./assets/js/initial-script.js"></script>
+    <script src="./assets/js/initial-script.js" async defer></script>
   </body>
 </html>

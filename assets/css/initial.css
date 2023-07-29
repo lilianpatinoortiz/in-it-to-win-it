@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(../images/backgroundImage.jpg);
+  width: 100%;
+  background-size: cover;
+
+  background-repeat: no-repeat;
+}
+
+img#logo {
+  margin-top: -5%;
+  margin-left: -50px;
+  width: 20%;
+}
+
+.frontpage-container {
+  background-color: #d9f0fa;
+  height: 190px;
+  border: 1px solid;
+}
+section.navbar {
+  display: flex;
+  background-color: #124b96;
+  padding: 10px 20px;
+}
