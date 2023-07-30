@@ -1,7 +1,6 @@
 
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551"; // feel free to put yours!
-let jobsAPIKey = "991596ba1amsh552f7f85c7ca672p17b652jsn773224bb2532";  // old key 
-// let jobsAPIKey = "cff46117admsh3bff66b81994c8ep12d733jsn4c20d3297f0a"; // new key is not working
+let jobsAPIKey = "cff46117admsh3bff66b81994c8ep12d733jsn4c20d3297f0a"; // new key is not working
 
 
 var searchButtonElement = document.querySelector(".button");
@@ -13,6 +12,7 @@ var locationValue;
 
 
 async function jobsApiCall(cityState) {
+  jobLiEl.innerHTML = ""; // Clear the previous job listings
   // 3. Api call to get jobs in the given location
   const url =
     "https://jsearch.p.rapidapi.com/search?query=" +
@@ -93,13 +93,14 @@ function getParams() {
   cityApiCall();
 }
 
- // Wait for the DOM to be fully loaded before running the JavaScript code
 document.addEventListener("DOMContentLoaded", function () {
-  // Get a reference to the search form element
-  const searchForm = document.getElementById("search-form");
+ 
+
+  // Get a reference to the element where job listings will be displayed
+  const jobLiEl = document.querySelector("#new-jobs");
 
   // Add an event listener to the search form
-  searchForm.addEventListener("submit", function (event) {
+  searchForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     // Get the values entered in the keyword and location input fields
@@ -111,14 +112,25 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("You need a keyword and a location for the search!");
       return;
     }
-      // Clear the previous job listings
-  // jobLiEl.innerHTML = "";
-    // Perform the job search with the entered keyword and location
-    getParams(keyword, location);
 
+    try {
+      // Get the latitude, longitude, and state of the location
+      const cityData = await cityApiCall(location);
+
+      // Call the weatherApiCall function with the location data
+      weatherApiCall(cityData.lat, cityData.lon, cityData.state);
+
+      // Perform the job search with the entered keyword and location
+      jobsApiCall(cityData.state);
+    } catch (error) {
+      console.error(error);
+    }
   });
-});
+  
+  getParams();
 
+});
+   
 //searched job context
 var jobLiEl = document.querySelector("#new-jobs");
 
