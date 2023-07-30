@@ -6,16 +6,6 @@ let endDate = endDateNotFormatted.toISOString().split("T")[0];
 let startDate = subtractYears(endDateNotFormatted, 1)
   .toISOString()
   .split("T")[0];
-let firstDayOfSpring = 80;
-let lastDayOfSpring = 173;
-let firstDayOfSummer = 174;
-let lastDayOfSummer = 267;
-let firstDayOfFall = 268;
-let lastDayOfFall = 357;
-let firstDayOfWinter = 358;
-let lastDayOfWinter = 365;
-let firstDayOfWinterOfYear = 0;
-let lastDayOfWinterOfYear = 79;
 
 var searchForm = document.querySelector("#search-form");
 var searchButtonElement = document.querySelector(".button");
@@ -51,7 +41,6 @@ async function weatherApiCall(cityLat, cityLon, cityName) {
     cityName,
     localStorageArray
   );
-  console.log(indexCityInLocalStorage);
   // if the city exists in local storage, we display the data from there, else call the api
   if (indexCityInLocalStorage >= 0) {
     showCityWeatherFromLocalStorage(indexCityInLocalStorage);
@@ -76,6 +65,16 @@ async function weatherApiCall(cityLat, cityLon, cityName) {
         var summerData = {};
         var fallData = {};
         var winterData = {};
+        let firstDayOfSpring = 80;
+        let lastDayOfSpring = 173;
+        let firstDayOfSummer = 174;
+        let lastDayOfSummer = 267;
+        let firstDayOfFall = 268;
+        let lastDayOfFall = 357;
+        let firstDayOfWinter = 358;
+        let lastDayOfWinter = 365;
+        let firstDayOfWinterOfYear = 0;
+        let lastDayOfWinterOfYear = 79;
 
         function average(array) {
           // get average in array of numbers
@@ -88,15 +87,15 @@ async function weatherApiCall(cityLat, cityLon, cityName) {
               springData[key] = Math.max.apply(
                 Math,
                 allData[key].slice(firstDayOfSpring, lastDayOfSpring)
-              ); // spring lasts 93 days - we take the average for rain, snow, temp and wind
+              ); // spring lasts ~93 days - we take the max for rain, snow and wind
               summerData[key] = Math.max.apply(
                 Math,
                 allData[key].slice(firstDayOfSummer, lastDayOfSummer)
-              ); // summer lasts 93 days - we take the average rain, snow, temp and wind
+              ); // summer lasts ~93 days - we take the max rain, snow and wind
               fallData[key] = Math.max.apply(
                 Math,
                 allData[key].slice(firstDayOfFall, lastDayOfFall)
-              ); // fall lasts 90 days - we take the average rain, snow, temp and wind
+              ); // fall lasts ~90 days - we take the max rain, snow and wind
               var winterArray = allData[key]
                 .slice(firstDayOfWinter, lastDayOfWinter)
                 .concat(
@@ -106,17 +105,18 @@ async function weatherApiCall(cityLat, cityLon, cityName) {
                   )
                 );
               winterData[key] = Math.max.apply(Math, winterArray);
-              // winter lasts 88 days - we take the average rain, snow, temp and wind
+              // winter lasts ~88 days - we take the average for temperature
             } else {
+              // for temperature we get the average
               springData[key] = average(
                 allData[key].slice(firstDayOfSpring, lastDayOfSpring)
-              ); // spring lasts 93 days - we take the average for rain, snow, temp and wind
+              ); // spring lasts ~93 days - we take the average for temperature
               summerData[key] = average(
                 allData[key].slice(firstDayOfSummer, lastDayOfSummer)
-              ); // summer lasts 93 days - we take the average rain, snow, temp and wind
+              ); // summer lasts ~93 days - we take the average for temperature
               fallData[key] = average(
                 allData[key].slice(firstDayOfFall, lastDayOfFall)
-              ); // fall lasts 90 days - we take the average rain, snow, temp and wind
+              ); // fall lasts ~90 days -we take the average for temperature
               var winterArray = allData[key]
                 .slice(firstDayOfWinter, lastDayOfWinter)
                 .concat(
@@ -125,9 +125,10 @@ async function weatherApiCall(cityLat, cityLon, cityName) {
                     lastDayOfWinterOfYear
                   )
                 );
-              winterData[key] = average(winterArray); // winter lasts 88 days - we take the average rain, snow, temp and wind
+              winterData[key] = average(winterArray); // winter lasts ~88 days - we take the average for temperature
             }
           } else {
+            // for sunrise and sunset, we get the median :)
             springData[key] = allData[key]
               .slice(firstDayOfSpring, lastDayOfSpring)[38]
               .split("T")[1]; // spring lasts 93 days - we take the middle value
@@ -213,7 +214,7 @@ async function doApiCalls() {
     weatherApiCall(cityData.lat, cityData.lon, cityData.name);
 
     // Perform the job search with the entered keyword and location
-    //jobsApiCall(keyword, location);
+    jobsApiCall(keyword, location);
   } catch (error) {
     console.error(error);
   }
