@@ -4,9 +4,6 @@
   box-sizing: border-box;
 }
 
-#search-form {
-}
-
 .columns {
   background-color: #5384d4;
 }
@@ -15,18 +12,18 @@
   margin: 20px;
   text-align: center;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .button {
   font-size: 1rem;
   font-weight: bold;
-  color: #0e84bf;
+  color: #5384d4;
   cursor: pointer;
   width: 40%;
 }
 .button:hover {
-  background-color: #ffda62;
-  box-shadow: 0 4px 8px rgba(255, 223, 12, 0.2);
+  background-color: #fafa11;
 }
 
 form {
@@ -35,6 +32,7 @@ form {
 }
 section {
   color: black;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .body-container {
   justify-content: center;
@@ -44,12 +42,11 @@ section {
   width: 20%;
   cursor: pointer;
 }
-/*
+
 .input:hover {
-  background-color: #ffda62;
-  box-shadow: 0 4px 8px rgba(255, 223, 12, 0.2);
+  box-shadow: 0 8px 8px #fafa11;
 }
-*/
+
 div.is-child {
   padding: 10px;
 }
@@ -64,15 +61,21 @@ section.is-child {
 .job-summary {
   max-height: 120px;
   cursor: pointer;
+  border: 1px solid #5384d4;
 
   > h3 {
     font-weight: bold;
   }
 }
+p.title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+}
 
 .job-summary:hover {
   max-height: 120px;
-  background-color: #ebc137;
+  box-shadow: 0 8px 8px #fafa11;
   cursor: pointer;
 }
 
@@ -82,8 +85,9 @@ section.is-child {
 }
 
 #clicked-job {
-  background-color: #aac4d1;
   border-radius: 0.375em;
+  cursor: pointer;
+  border: 1px solid #5384d4;
 }
 
 .scroll-allowed {
@@ -100,7 +104,6 @@ footer {
   margin-top: auto;
 }
 
-/* Scroll jobs styling */
 .scroll-allowed::-webkit-scrollbar {
   width: 11px;
 }

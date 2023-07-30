@@ -12,12 +12,14 @@ img#logo {
 
 .frontpage-container {
   height: 190px;
+  margin-bottom: -20px;
   /*
   border: 1px solid;
   */
 }
 .columns {
   background-color: #5384d4;
+  padding: 10px;
 }
 
 #search-nav {
