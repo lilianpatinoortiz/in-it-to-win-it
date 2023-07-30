@@ -253,10 +253,9 @@ function displayWeatherinUI(result) {
     var seasonDiv = document.querySelector("#weather-" + key);
     seasonDiv.querySelector("#temperature").textContent =
       result[key].temperature_2m_max.toFixed(2) + " ℉";
-    // wmo (weather) - TO BE DONE
+    // wmo (weather)
     seasonDiv.querySelector("#wmo-code").textContent =
       wmo[result[key].weathercode.toFixed()];
-
     // rain
     seasonDiv.querySelector("#rain").textContent =
       result[key].rain_sum.toFixed() + " mm - " + "rain warning";
