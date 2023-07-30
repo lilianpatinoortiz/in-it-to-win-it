@@ -83,50 +83,28 @@ async function weatherApiCall(cityLat, cityLon, cityName) {
 
         for (var key in allData) {
           if (key != "sunrise" && key != "sunset") {
-            if (key != "temperature_2m_max") {
-              springData[key] = Math.max.apply(
-                Math,
-                allData[key].slice(firstDayOfSpring, lastDayOfSpring)
-              ); // spring lasts ~93 days - we take the max for rain, snow and wind
-              summerData[key] = Math.max.apply(
-                Math,
-                allData[key].slice(firstDayOfSummer, lastDayOfSummer)
-              ); // summer lasts ~93 days - we take the max rain, snow and wind
-              fallData[key] = Math.max.apply(
-                Math,
-                allData[key].slice(firstDayOfFall, lastDayOfFall)
-              ); // fall lasts ~90 days - we take the max rain, snow and wind
-              var winterArray = allData[key]
-                .slice(firstDayOfWinter, lastDayOfWinter)
-                .concat(
-                  allData[key].slice(
-                    firstDayOfWinterOfYear,
-                    lastDayOfWinterOfYear
-                  )
-                );
-              winterData[key] = Math.max.apply(Math, winterArray);
-              // winter lasts ~88 days - we take the average for temperature
-            } else {
-              // for temperature we get the average
-              springData[key] = average(
-                allData[key].slice(firstDayOfSpring, lastDayOfSpring)
-              ); // spring lasts ~93 days - we take the average for temperature
-              summerData[key] = average(
-                allData[key].slice(firstDayOfSummer, lastDayOfSummer)
-              ); // summer lasts ~93 days - we take the average for temperature
-              fallData[key] = average(
-                allData[key].slice(firstDayOfFall, lastDayOfFall)
-              ); // fall lasts ~90 days -we take the average for temperature
-              var winterArray = allData[key]
-                .slice(firstDayOfWinter, lastDayOfWinter)
-                .concat(
-                  allData[key].slice(
-                    firstDayOfWinterOfYear,
-                    lastDayOfWinterOfYear
-                  )
-                );
-              winterData[key] = average(winterArray); // winter lasts ~88 days - we take the average for temperature
-            }
+            springData[key] = Math.max.apply(
+              Math,
+              allData[key].slice(firstDayOfSpring, lastDayOfSpring)
+            ); // spring lasts ~93 days - we take the max for rain, snow and wind
+            summerData[key] = Math.max.apply(
+              Math,
+              allData[key].slice(firstDayOfSummer, lastDayOfSummer)
+            ); // summer lasts ~93 days - we take the max rain, snow and wind
+            fallData[key] = Math.max.apply(
+              Math,
+              allData[key].slice(firstDayOfFall, lastDayOfFall)
+            ); // fall lasts ~90 days - we take the max rain, snow and wind
+            var winterArray = allData[key]
+              .slice(firstDayOfWinter, lastDayOfWinter)
+              .concat(
+                allData[key].slice(
+                  firstDayOfWinterOfYear,
+                  lastDayOfWinterOfYear
+                )
+              );
+            winterData[key] = Math.max.apply(Math, winterArray);
+            // winter lasts ~88 days - we take the average for temperature
           } else {
             // for sunrise and sunset, we get the median :)
             springData[key] = allData[key]
@@ -214,7 +192,7 @@ async function doApiCalls() {
     weatherApiCall(cityData.lat, cityData.lon, cityData.name);
 
     // Perform the job search with the entered keyword and location
-    jobsApiCall(keyword, location);
+    //jobsApiCall(keyword, location);
   } catch (error) {
     console.error(error);
   }
@@ -271,7 +249,10 @@ function displayWeatherinUI(result) {
     // temperature
     var seasonDiv = document.querySelector("#weather-" + key);
     seasonDiv.querySelector("#temperature").textContent =
-      result[key].temperature_2m_max.toFixed(2) + " ℉";
+      result[key].temperature_2m_max.toFixed(2) +
+      " ℉ ~ " +
+      result[key].temperature_2m_min.toFixed(2) +
+      " ℉ ";
     // wmo (weather)
     seasonDiv.querySelector("#wmo-code").textContent =
       wmo[result[key].weathercode.toFixed()];
