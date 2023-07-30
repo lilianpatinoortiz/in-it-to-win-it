@@ -1,5 +1,5 @@
-let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551"; // feel free to put yours!
-let jobsAPIKey = "d7fcf0a6a7msha1676c0d9f63b5ap104558jsn4347a1655b29"; // new key is not working
+let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551";
+let jobsAPIKey = "d7fcf0a6a7msha1676c0d9f63b5ap104558jsn4347a1655b29";
 
 var searchForm = document.querySelector("#search-form");
 var searchButtonElement = document.querySelector(".button");
