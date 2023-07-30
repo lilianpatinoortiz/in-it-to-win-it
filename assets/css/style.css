@@ -5,10 +5,11 @@
 }
 
 #search-form {
-  margin-left: 25%;
-  margin-right: 45%;
 }
 
+.columns {
+  background-color: #5384d4;
+}
 .subheader {
   color: white;
   margin: 20px;
@@ -41,12 +42,14 @@ section {
 .input {
   margin-right: 30px;
   width: 20%;
+  cursor: pointer;
 }
+/*
 .input:hover {
   background-color: #ffda62;
   box-shadow: 0 4px 8px rgba(255, 223, 12, 0.2);
 }
-
+*/
 div.is-child {
   padding: 10px;
 }
