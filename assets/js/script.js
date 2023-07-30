@@ -37,8 +37,6 @@ async function cityApiCall(location) {
   try {
     const response = await fetch(url);
     const data = await response.json();
-    console.log("cityApiCall --------");
-    console.log(data);
     return data[0];
   } catch (error) {
     console.error(error);
@@ -170,8 +168,6 @@ async function jobsApiCall(keyword, cityState) {
   try {
     const response = await fetch(url, options);
     const result = await response.json();
-    console.log("jobsApiCall --------");
-    console.log(result);
     displayJobListInformation(result.data);
   } catch (error) {
     console.error(error);
@@ -199,7 +195,7 @@ async function doApiCalls() {
     weatherApiCall(cityData.lat, cityData.lon);
 
     // Perform the job search with the entered keyword and location
-    //jobsApiCall(keyword, location);
+    jobsApiCall(keyword, location);
   } catch (error) {
     console.error(error);
   }
@@ -252,7 +248,6 @@ function displayJobListInformation(result) {
 }
 
 function displayWeatherinUI(result) {
-  console.log(result);
   for (var key in result) {
     // temperature
     var seasonDiv = document.querySelector("#weather-" + key);
@@ -283,14 +278,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Add an event listener to the search form
   searchForm.addEventListener("submit", async function (event) {
-    console.log("****** search button clicked");
+    console.log(">>> Search button clicked");
     event.preventDefault();
     doApiCalls();
   });
 });
 
 async function getParams() {
-  console.log("****** redirected from initial page");
+  console.log(">>> Redirected from initial page");
   const urlParams = new URLSearchParams(window.location.search);
   const keywordString = urlParams.get("keyword");
   const locationString = urlParams.get("location");
