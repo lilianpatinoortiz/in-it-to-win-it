@@ -102,6 +102,8 @@ p.title {
   border-radius: 0.375em;
   cursor: pointer;
   border: 2px solid #5384d4;
+  max-height: 400px;
+  overflow: scroll;
 }
 
 .scroll-allowed {

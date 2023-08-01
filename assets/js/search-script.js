@@ -318,7 +318,6 @@ function loadBigCard(result, index) {
   const title = document.querySelector(".title");
   const description = document.querySelector(".description");
   title.innerHTML = data.employer_name;
-  description.innerHTML = data.job_description;
 }
 
 // display the weather in the ui
