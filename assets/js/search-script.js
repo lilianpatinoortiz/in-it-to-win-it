@@ -158,7 +158,7 @@ async function weatherApiCall(cityLat, cityLon, cityName) {
         background: "white",
         confirmButtonText: "Retry",
       }).then((result) => {
-        var locQueryUrl = "./initial.html";
+        var locQueryUrl = "./index.html";
         document.location.href = locQueryUrl;
       });
     }
@@ -195,7 +195,7 @@ async function jobsApiCall(keyword, cityState) {
       background: "white",
       confirmButtonText: "Retry",
     }).then((result) => {
-      var locQueryUrl = "./initial.html";
+      var locQueryUrl = "./index.html";
       document.location.href = locQueryUrl;
     });
   }
@@ -223,7 +223,7 @@ async function doApiCalls() {
       background: "white",
       confirmButtonText: "Retry",
     }).then((result) => {
-      var locQueryUrl = "./initial.html";
+      var locQueryUrl = "./index.html";
       document.location.href = locQueryUrl;
     });
   } else {
@@ -242,7 +242,7 @@ async function doApiCalls() {
         background: "white",
         confirmButtonText: "Retry",
       }).then((result) => {
-        var locQueryUrl = "./initial.html";
+        var locQueryUrl = "./index.html";
         document.location.href = locQueryUrl;
       });
       return;
@@ -387,7 +387,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function getParams() {
-  console.log(">>> Redirected from initial page");
+  console.log(">>> Redirected from index page");
   const urlParams = new URLSearchParams(window.location.search);
   const keywordString = urlParams.get("keyword");
   const locationString = urlParams.get("location");

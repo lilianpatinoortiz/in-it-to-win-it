@@ -18,7 +18,7 @@ function handleSearchFormSubmit(event) {
   }
 
   var locQueryUrl =
-    "./index.html?keyword=" + keywordString + "&location=" + locationString;
+    "./search.html?keyword=" + keywordString + "&location=" + locationString;
   document.location.href = locQueryUrl;
 }
 
