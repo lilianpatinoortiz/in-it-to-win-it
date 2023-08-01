@@ -158,9 +158,10 @@ footer {
 }
 #wmo-code {
   margin-bottom: 10px;
-  background-color: #00d1b269;
+  background-color: #9becfc;
   border-radius: 15px;
   text-align: center;
+  font-weight: bold;
   width: fit-content;
   padding: 7px;
 }
