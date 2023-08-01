@@ -184,7 +184,13 @@ async function doApiCalls() {
 
   // Check if either keyword or location is empty
   if (!keyword || !location) {
-    console.error("You need a keyword and a location for the search!");
+    Swal.fire({
+      title: 'Error!',
+      text: 'Unknown keyword or location, Please retry!',
+      icon: 'error',
+      background: "white",
+      confirmButtonText: 'Retry'
+    })
     return;
   }
   try {
@@ -205,8 +211,21 @@ async function doApiCalls() {
 var jobLiEl = document.querySelector("#new-jobs");
 
 function displayJobListInformation(result) {
+  console.log(result);
+
   for (i = 0; i < result.length; i++) {
     const newJobs = document.createElement("div");
+
+    // each new job when clicked, will grab which index it is in the list cards
+    // and then call loadBigCard passing in the index needed to load that little card
+    // as well as the results from the api so that we can grab its data
+    newJobs.addEventListener("click", function(){
+      const index = newJobs.classList[3].slice(5)
+      console.log(index);
+      loadBigCard(result, index);
+    })
+    // if no click have happened, default to showing the first card as the large one
+    loadBigCard(result, 0);
     const compName = document.createElement("h3");
     const jobTitle = document.createElement("li");
     const salary = document.createElement("li");
@@ -235,8 +254,8 @@ function displayJobListInformation(result) {
     } else {
       type.textContent = "Type: " + result[i].job_employment_type;
     }
-
-    newJobs.className = "tile is-child job-summary";
+// data-${i} is added to track which index we want
+    newJobs.className = `tile is-child job-summary data-${i}` ;
     compName.className = "is-underlined";
 
     jobLiEl.appendChild(newJobs);
@@ -245,6 +264,14 @@ function displayJobListInformation(result) {
     newJobs.appendChild(salary);
     newJobs.appendChild(type);
   }
+  // taking the needed data, and appending it to our big card
+}
+function loadBigCard(result, index) {
+  const data = result[index];
+  const title = document.querySelector(".title");
+  const description = document.querySelector(".description");
+  title.innerHTML = data.employer_name;
+  description.innerHTML = data.job_description;
 }
 
 function displayWeatherinUI(result) {
