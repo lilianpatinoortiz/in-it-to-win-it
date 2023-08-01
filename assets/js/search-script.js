@@ -20,7 +20,7 @@ function subtractYears(date, years) {
 async function cityApiCall(location) {
   // 1. API call to get lat & lon from the city selected
   var url =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
+    "https://api.openweathermap.org/geo/1.0/direct?q=" +
     location +
     "&limit=10&appid=" +
     weatherAPIKey;
