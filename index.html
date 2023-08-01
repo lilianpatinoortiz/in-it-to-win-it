@@ -4,14 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Umbrella Job</title>
+    <!-- Link to Bulma CSS framework -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
+    <!-- Link to dark theme for SweetAlert2 -->
     <link
       href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
       rel="stylesheet"
     />
+    <!-- Font Awesome kit for icons -->
     <script
       src="https://kit.fontawesome.com/653016226d.js"
       crossorigin="anonymous"
@@ -30,6 +33,7 @@
         <!-- Search Section -->
         <div class="columns">
           <div class="column tile is-4">
+            <!-- Subheader for the search section -->
             <div class="container-max-width subheader">
               <subheader
                 >Seeing the weather before applying to a job with
@@ -38,6 +42,7 @@
             </div>
           </div>
           <div class="column tile is-4" id="search-bar">
+            <!-- Search form for job search -->
             <form id="search-form">
               <input
                 id="keyword-input"
@@ -59,6 +64,7 @@
         <div class="tile is-ancestor">
           <!-- Jobs List Section -->
           <section class="tile is-4 is-vertical">
+            <!-- Container for displaying new jobs -->
             <div
               class="tile is-parent is-vertical scroll-allowed"
               id="new-jobs"
@@ -71,7 +77,7 @@
                 <p class="title"></p>
                 <p></p>
                 <p class="description"></p>
-                <p>description :</p>
+                <button class="button apply-button">Apply Now</button>
               </div>
             </div>
             <!-- Jobs Details - Weather Section -->
@@ -79,6 +85,7 @@
               <div class="tile is-parent is-vertical">
                 <section class="tile is-child">
                   <div id="weather-spring" class="weather">
+                    <!-- Weather section for Spring -->
                     <p class="title">
                       Spring <i class="fa-solid fa-cloud-sun"></i>
                     </p>
@@ -105,6 +112,7 @@
                 </section>
                 <section class="tile is-child">
                   <div id="weather-summer" class="weather">
+                    <!-- Weather section for Summer -->
                     <p class="title">Summer <i class="fa-solid fa-sun"></i></p>
                     <hr />
                     <p id="temperature"></p>
@@ -151,6 +159,7 @@
                 </section>
                 <section class="tile is-child">
                   <div id="weather-winter" class="weather">
+                    <!-- Weather section for Winter -->
                     <p class="title">
                       Winter <i class="fa-solid fa-snowflake"></i>
                     </p>
@@ -181,6 +190,7 @@
     </main>
     <!-- Footer -->
     <footer>
+      <!-- Copyright notice -->
       <h3>
         All contents of this site, unless otherwise noted, are ©2023
         In-it-to-win-it

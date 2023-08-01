@@ -19,6 +19,7 @@ let lastDayOfWinterOfYear = 79;
 
 var searchForm = document.querySelector("#search-form");
 var searchButtonElement = document.querySelector(".button");
+var applyButton = document.querySelector(".apply-button");
 
 function subtractYears(date, years) {
   const dateCopy = new Date(date);
@@ -219,7 +220,7 @@ function displayJobListInformation(result) {
     // each new job when clicked, will grab which index it is in the list cards
     // and then call loadBigCard passing in the index needed to load that little card
     // as well as the results from the api so that we can grab its data
-    newJobs.addEventListener("click", function(){
+    newJobs.addEventListener("click", function () {
       const index = newJobs.classList[3].slice(5)
       console.log(index);
       loadBigCard(result, index);
@@ -254,9 +255,20 @@ function displayJobListInformation(result) {
     } else {
       type.textContent = "Type: " + result[i].job_employment_type;
     }
-// data-${i} is added to track which index we want
-    newJobs.className = `tile is-child job-summary data-${i}` ;
+    // data-${i} is added to track which index we want
+    newJobs.className = `tile is-child job-summary data-${i}`;
     compName.className = "is-underlined";
+
+    applyButton.addEventListener("click", function () {
+      if (result[i]) {
+        window.open(result[i].job_apply_link, '_blank');
+      }
+      else {
+        console.log("no data found ", result[i])
+      }
+
+    })
+    document.querySelector("#clicked-job").appendChild(applyButton)
 
     jobLiEl.appendChild(newJobs);
     newJobs.appendChild(compName);

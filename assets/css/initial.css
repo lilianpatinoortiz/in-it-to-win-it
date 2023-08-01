@@ -1,15 +1,17 @@
+/* Apply default styles to all elements */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+/* Styling for the Umbrella Job logo */
 
 img#logo {
   margin-top: -5%;
   margin-left: -50px;
   width: 20%;
 }
-
+/* Styling for the frontpage container */
 .frontpage-container {
   height: 190px;
   margin-bottom: -20px;
@@ -17,11 +19,13 @@ img#logo {
   border: 1px solid;
   */
 }
+/* Styling of the subhead on the top of the webpage  */
+
 .columns {
   background-color: #5384d4;
   padding: 10px;
 }
-
+/* Styling for the search navigation form */
 #search-nav {
   margin-left: 25%;
   margin-right: 45%;
@@ -36,15 +40,19 @@ form#search-nav.px-1 {
   justify-content: space-between;
   padding: 20px;
 }
+/* Styling for the search button */
 button#search-button {
   color: #5384d4;
   font-weight: bold;
 }
+/* Styling for the search button on hover */
 
 button#search-button:hover {
   background-color: #fafa11;
   cursor: pointer;
 }
+/* Styling for input section on hover */
+
 input.input:hover {
   color: #000;
   cursor: pointer;
