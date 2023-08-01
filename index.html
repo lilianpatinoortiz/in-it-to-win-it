@@ -1,221 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Umbrella Job</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/653016226d.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Umbrella Job</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/653016226d.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./assets/css/style.css" />
-</head>
-
-<body>
-  <!-- Header -->
-  <!-- <div class="container-max-width header">
+  <body>
+    <!-- Header -->
+    <!-- <div class="container-max-width header">
       <header>Umbrella Job</header>
     </div> -->
-  <!-- Body -->
-  <main>
-    <div class="body-container">
-      <!-- Search Section -->
-      <div class="columns">
-        <div class="column tile is-4">
-          <div class="container-max-width subheader">
-            <subheader>Seeing the weather before applying to a job with
-              UmbrellaJob!</subheader>
-          </div>
-        </div>
-        <div class="column tile is-4" id="search-bar">
-          <form id="search-form">
-            <input id="keyword-input" class="input tile is-6" type="text" placeholder="Keyword,Job title..." />
-            <input id="location-input" class="input tile is-6" type="text" placeholder="Country, City, or Remote..." />
-            <button class="button">Search</button>
-          </form>
-        </div>
-      </div>
-      <!-- Jobs Section -->
-      <div class="tile is-ancestor">
-        <!-- Jobs List Section -->
-        <section class="tile is-4 is-vertical">
-          <div class="tile is-parent is-vertical scroll-allowed" id="new-jobs"></div>
-        </section>
-        <!-- Jobs Details Section -->
-        <section class="tile is-8 is-vertical">
-          <div class="tile is-parent">
-            <div class="tile is-child" id="clicked-job">
-              <p class="title"></p>
-              <p></p>
-              <p class="description">
-              <p> description :</p>
-              </p>
+    <!-- Body -->
+    <main>
+      <div class="body-container">
+        <!-- Search Section -->
+        <div class="columns">
+          <div class="column tile is-4">
+            <div class="container-max-width subheader">
+              <subheader
+                >Seeing the weather before applying to a job with
+                UmbrellaJob!</subheader
+              >
             </div>
           </div>
-          <!-- Jobs Details - Weather Section -->
-          <div class="tile">
-            <div class="tile is-parent is-vertical">
-              <section class="tile is-child">
-                <div id="weather-spring" class="weather">
-                  <p class="title">Spring <i class="fa-solid fa-cloud-sun"></i> </p>
-                  <hr />
-                  <p id="temperature"></p>
-                  <div>
+          <div class="column tile is-4" id="search-bar">
+            <form id="search-form">
+              <input
+                id="keyword-input"
+                class="input tile is-6"
+                type="text"
+                placeholder="Keyword,Job title..."
+              />
+              <input
+                id="location-input"
+                class="input tile is-6"
+                type="text"
+                placeholder="Country, City, or Remote..."
+              />
+              <button class="button">Search</button>
+            </form>
+          </div>
+        </div>
+        <!-- Jobs Section -->
+        <div class="tile is-ancestor">
+          <!-- Jobs List Section -->
+          <section class="tile is-4 is-vertical">
+            <div
+              class="tile is-parent is-vertical scroll-allowed"
+              id="new-jobs"
+            ></div>
+          </section>
+          <!-- Jobs Details Section -->
+          <section class="tile is-8 is-vertical">
+            <div class="tile is-parent">
+              <div class="tile is-child" id="clicked-job">
+                <p class="title"></p>
+                <p></p>
+                <p class="description"></p>
+                <p>description :</p>
+              </div>
+            </div>
+            <!-- Jobs Details - Weather Section -->
+            <div class="tile">
+              <div class="tile is-parent is-vertical">
+                <section class="tile is-child">
+                  <div id="weather-spring" class="weather">
+                    <p class="title">
+                      Spring <i class="fa-solid fa-cloud-sun"></i>
+                    </p>
+                    <hr />
+                    <p id="temperature"></p>
+                    <div>
+                      <p id="wmo-code">weather descritpion</p>
+                    </div>
+                    <div class="rain-content">
+                      <i class="fas fa-cloud-rain fa-2x"></i>
+                      <p id="rain"></p>
+                    </div>
+                    <div class="snow-content">
+                      <i class="fas fa-snowflake fa-2x"></i>
+                      <p id="snow"></p>
+                    </div>
+                    <div class="wind-content">
+                      <i class="fas fa-wind fa-2x"></i>
+                      <p id="wind"></p>
+                    </div>
+                    <p id="sunrise"></p>
+                    <p id="sunset"></p>
+                  </div>
+                </section>
+                <section class="tile is-child">
+                  <div id="weather-summer" class="weather">
+                    <p class="title">Summer <i class="fa-solid fa-sun"></i></p>
+                    <hr />
+                    <p id="temperature"></p>
                     <p id="wmo-code">weather descritpion</p>
+                    <div class="rain-content">
+                      <i class="fas fa-cloud-rain fa-2x"></i>
+                      <p id="rain"></p>
+                    </div>
+                    <div class="snow-content">
+                      <p id="snow"></p>
+                      <i class="fas fa-snowflake fa-2x"></i>
+                    </div>
+                    <div class="wind-content">
+                      <p id="wind"></p>
+                      <i class="fas fa-wind fa-2x"></i>
+                    </div>
+                    <p id="sunrise"></p>
+                    <p id="sunset"></p>
                   </div>
-                  <div class="rain-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-cloud-rain" viewBox="0 0 16 16">
-                      <path
-                        d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z" />
-                    </svg>
-                    <p id="rain"></p>
+                </section>
+              </div>
+              <div class="tile is-parent is-vertical">
+                <section class="tile is-child">
+                  <div id="weather-fall" class="weather">
+                    <p class="title">Fall <i class="fa-solid fa-leaf"></i></p>
+                    <hr />
+                    <p id="temperature"></p>
+                    <p id="wmo-code">weather descritpion</p>
+                    <div class="rain-content">
+                      <i class="fas fa-cloud-rain fa-2x"></i>
+                      <p id="rain"></p>
+                    </div>
+                    <div class="snow-content">
+                      <i class="fas fa-snowflake fa-2x"></i>
+                      <p id="snow"></p>
+                    </div>
+                    <div class="wind-content">
+                      <i class="fas fa-wind fa-2x"></i>
+                      <p id="wind"></p>
+                    </div>
+                    <p id="sunrise"></p>
+                    <p id="sunset"></p>
                   </div>
-                  <div class="snow-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-snow2" viewBox="0 0 16 16">
-                      <path
-                        d="M8 16a.5.5 0 0 1-.5-.5v-1.293l-.646.647a.5.5 0 0 1-.707-.708L7.5 12.793v-1.086l-.646.647a.5.5 0 0 1-.707-.708L7.5 10.293V8.866l-1.236.713-.495 1.85a.5.5 0 1 1-.966-.26l.237-.882-.94.542-.496 1.85a.5.5 0 1 1-.966-.26l.237-.882-1.12.646a.5.5 0 0 1-.5-.866l1.12-.646-.884-.237a.5.5 0 1 1 .26-.966l1.848.495.94-.542-.882-.237a.5.5 0 1 1 .258-.966l1.85.495L7 8l-1.236-.713-1.849.495a.5.5 0 1 1-.258-.966l.883-.237-.94-.542-1.85.495a.5.5 0 0 1-.258-.966l.883-.237-1.12-.646a.5.5 0 1 1 .5-.866l1.12.646-.237-.883a.5.5 0 0 1 .966-.258l.495 1.849.94.542-.236-.883a.5.5 0 0 1 .966-.258l.495 1.849 1.236.713V5.707L6.147 4.354a.5.5 0 1 1 .707-.708l.646.647V3.207L6.147 1.854a.5.5 0 1 1 .707-.708l.646.647V.5a.5.5 0 0 1 1 0v1.293l.647-.647a.5.5 0 1 1 .707.708L8.5 3.207v1.086l.647-.647a.5.5 0 1 1 .707.708L8.5 5.707v1.427l1.236-.713.495-1.85a.5.5 0 1 1 .966.26l-.236.882.94-.542.495-1.85a.5.5 0 1 1 .966.26l-.236.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.883.237a.5.5 0 1 1-.26.966l-1.848-.495-.94.542.883.237a.5.5 0 1 1-.26.966l-1.848-.495L9 8l1.236.713 1.849-.495a.5.5 0 0 1 .259.966l-.883.237.94.542 1.849-.495a.5.5 0 0 1 .259.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.236.883a.5.5 0 1 1-.966.258l-.495-1.849-.94-.542.236.883a.5.5 0 0 1-.966.258L9.736 9.58 8.5 8.866v1.427l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647v1.086l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647V15.5a.5.5 0 0 1-.5.5z" />
-                    </svg>
-                    <p id="snow"></p>
+                </section>
+                <section class="tile is-child">
+                  <div id="weather-winter" class="weather">
+                    <p class="title">
+                      Winter <i class="fa-solid fa-snowflake"></i>
+                    </p>
+                    <hr />
+                    <p id="temperature"></p>
+                    <p id="wmo-code">weather descritpion</p>
+                    <div class="rain-content">
+                      <i class="fas fa-cloud-rain fa-2x"></i>
+                      <p id="rain"></p>
+                    </div>
+                    <div class="snow-content">
+                      <i class="fas fa-snowflake fa-2x"></i>
+                      <p id="snow"></p>
+                    </div>
+                    <div class="wind-content">
+                      <i class="fas fa-wind fa-2x"></i>
+                      <p id="wind"></p>
+                    </div>
+                    <p id="sunrise"></p>
+                    <p id="sunset"></p>
                   </div>
-                  <div class="wind-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-wind" viewBox="0 0 16 16">
-                      <path
-                        d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5zm-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2zM0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5z" />
-                    </svg>
-                    <p id="wind"></p>
-                  </div>
-                  <p id="sunrise"></p>
-                  <p id="sunset"></p>
-                </div>
-              </section>
-              <section class="tile is-child">
-                <div id="weather-summer" class="weather">
-                  <p class="title">Summer <i class="fa-solid fa-sun"></i></p>
-                  <hr />
-                  <p id="temperature"></p>
-                  <p id="wmo-code">weather descritpion</p>
-                  <div class="rain-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-cloud-rain" viewBox="0 0 16 16">
-                      <path
-                        d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z" />
-                    </svg>
-                    <p id="rain"></p>
-                  </div>
-                  <div class="snow-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-snow2" viewBox="0 0 16 16">
-                      <path
-                        d="M8 16a.5.5 0 0 1-.5-.5v-1.293l-.646.647a.5.5 0 0 1-.707-.708L7.5 12.793v-1.086l-.646.647a.5.5 0 0 1-.707-.708L7.5 10.293V8.866l-1.236.713-.495 1.85a.5.5 0 1 1-.966-.26l.237-.882-.94.542-.496 1.85a.5.5 0 1 1-.966-.26l.237-.882-1.12.646a.5.5 0 0 1-.5-.866l1.12-.646-.884-.237a.5.5 0 1 1 .26-.966l1.848.495.94-.542-.882-.237a.5.5 0 1 1 .258-.966l1.85.495L7 8l-1.236-.713-1.849.495a.5.5 0 1 1-.258-.966l.883-.237-.94-.542-1.85.495a.5.5 0 0 1-.258-.966l.883-.237-1.12-.646a.5.5 0 1 1 .5-.866l1.12.646-.237-.883a.5.5 0 0 1 .966-.258l.495 1.849.94.542-.236-.883a.5.5 0 0 1 .966-.258l.495 1.849 1.236.713V5.707L6.147 4.354a.5.5 0 1 1 .707-.708l.646.647V3.207L6.147 1.854a.5.5 0 1 1 .707-.708l.646.647V.5a.5.5 0 0 1 1 0v1.293l.647-.647a.5.5 0 1 1 .707.708L8.5 3.207v1.086l.647-.647a.5.5 0 1 1 .707.708L8.5 5.707v1.427l1.236-.713.495-1.85a.5.5 0 1 1 .966.26l-.236.882.94-.542.495-1.85a.5.5 0 1 1 .966.26l-.236.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.883.237a.5.5 0 1 1-.26.966l-1.848-.495-.94.542.883.237a.5.5 0 1 1-.26.966l-1.848-.495L9 8l1.236.713 1.849-.495a.5.5 0 0 1 .259.966l-.883.237.94.542 1.849-.495a.5.5 0 0 1 .259.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.236.883a.5.5 0 1 1-.966.258l-.495-1.849-.94-.542.236.883a.5.5 0 0 1-.966.258L9.736 9.58 8.5 8.866v1.427l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647v1.086l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647V15.5a.5.5 0 0 1-.5.5z" />
-                    </svg>
-                    <p id="snow"></p>
-                  </div>
-                  <div class="wind-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-wind" viewBox="0 0 16 16">
-                      <path
-                        d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5zm-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2zM0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5z" />
-                    </svg>
-                    <p id="wind"></p>
-                  </div>
-                  <p id="sunrise"></p>
-                  <p id="sunset"></p>
-                </div>
-              </section>
+                </section>
+              </div>
             </div>
-            <div class="tile is-parent is-vertical">
-              <section class="tile is-child">
-                <div id="weather-fall" class="weather">
-                  <p class="title">Fall <i class="fa-regular fa-leaf"></i></p>
-                  <hr />
-                  <p id="temperature"></p>
-                  <p id="wmo-code">weather descritpion</p>
-                  <div class="rain-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-cloud-rain" viewBox="0 0 16 16">
-                      <path
-                        d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z" />
-                    </svg>
-                    <p id="rain"></p>
-                  </div>
-                  <div class="snow-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-snow2" viewBox="0 0 16 16">
-                      <path
-                        d="M8 16a.5.5 0 0 1-.5-.5v-1.293l-.646.647a.5.5 0 0 1-.707-.708L7.5 12.793v-1.086l-.646.647a.5.5 0 0 1-.707-.708L7.5 10.293V8.866l-1.236.713-.495 1.85a.5.5 0 1 1-.966-.26l.237-.882-.94.542-.496 1.85a.5.5 0 1 1-.966-.26l.237-.882-1.12.646a.5.5 0 0 1-.5-.866l1.12-.646-.884-.237a.5.5 0 1 1 .26-.966l1.848.495.94-.542-.882-.237a.5.5 0 1 1 .258-.966l1.85.495L7 8l-1.236-.713-1.849.495a.5.5 0 1 1-.258-.966l.883-.237-.94-.542-1.85.495a.5.5 0 0 1-.258-.966l.883-.237-1.12-.646a.5.5 0 1 1 .5-.866l1.12.646-.237-.883a.5.5 0 0 1 .966-.258l.495 1.849.94.542-.236-.883a.5.5 0 0 1 .966-.258l.495 1.849 1.236.713V5.707L6.147 4.354a.5.5 0 1 1 .707-.708l.646.647V3.207L6.147 1.854a.5.5 0 1 1 .707-.708l.646.647V.5a.5.5 0 0 1 1 0v1.293l.647-.647a.5.5 0 1 1 .707.708L8.5 3.207v1.086l.647-.647a.5.5 0 1 1 .707.708L8.5 5.707v1.427l1.236-.713.495-1.85a.5.5 0 1 1 .966.26l-.236.882.94-.542.495-1.85a.5.5 0 1 1 .966.26l-.236.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.883.237a.5.5 0 1 1-.26.966l-1.848-.495-.94.542.883.237a.5.5 0 1 1-.26.966l-1.848-.495L9 8l1.236.713 1.849-.495a.5.5 0 0 1 .259.966l-.883.237.94.542 1.849-.495a.5.5 0 0 1 .259.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.236.883a.5.5 0 1 1-.966.258l-.495-1.849-.94-.542.236.883a.5.5 0 0 1-.966.258L9.736 9.58 8.5 8.866v1.427l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647v1.086l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647V15.5a.5.5 0 0 1-.5.5z" />
-                    </svg>
-                    <p id="snow"></p>
-                  </div>
-                  <div class="wind-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-wind" viewBox="0 0 16 16">
-                      <path
-                        d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5zm-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2zM0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5z" />
-                    </svg>
-                    <p id="wind"></p>
-                  </div>
-                  <p id="sunrise"></p>
-                  <p id="sunset"></p>
-                </div>
-              </section>
-              <section class="tile is-child">
-                <div id="weather-winter" class="weather">
-                  <p class="title">Winter <i class="fa-solid fa-snowflake"></i></p>
-                  <hr />
-                  <p id="temperature"></p>
-                  <p id="wmo-code">weather descritpion</p>
-                  <div class="rain-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-cloud-rain" viewBox="0 0 16 16">
-                      <path
-                        d="M4.158 12.025a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 0 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-.5 1.5a.5.5 0 0 1-.948-.316l.5-1.5a.5.5 0 0 1 .632-.317zm3 0a.5.5 0 0 1 .316.633l-1 3a.5.5 0 1 1-.948-.316l1-3a.5.5 0 0 1 .632-.317zm.247-6.998a5.001 5.001 0 0 0-9.499-1.004A3.5 3.5 0 1 0 3.5 11H13a3 3 0 0 0 .405-5.973zM8.5 2a4 4 0 0 1 3.976 3.555.5.5 0 0 0 .5.445H13a2 2 0 0 1 0 4H3.5a2.5 2.5 0 1 1 .605-4.926.5.5 0 0 0 .596-.329A4.002 4.002 0 0 1 8.5 2z" />
-                    </svg>
-                    <p id="rain"></p>
-                  </div>
-                  <div class="snow-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-snow2" viewBox="0 0 16 16">
-                      <path
-                        d="M8 16a.5.5 0 0 1-.5-.5v-1.293l-.646.647a.5.5 0 0 1-.707-.708L7.5 12.793v-1.086l-.646.647a.5.5 0 0 1-.707-.708L7.5 10.293V8.866l-1.236.713-.495 1.85a.5.5 0 1 1-.966-.26l.237-.882-.94.542-.496 1.85a.5.5 0 1 1-.966-.26l.237-.882-1.12.646a.5.5 0 0 1-.5-.866l1.12-.646-.884-.237a.5.5 0 1 1 .26-.966l1.848.495.94-.542-.882-.237a.5.5 0 1 1 .258-.966l1.85.495L7 8l-1.236-.713-1.849.495a.5.5 0 1 1-.258-.966l.883-.237-.94-.542-1.85.495a.5.5 0 0 1-.258-.966l.883-.237-1.12-.646a.5.5 0 1 1 .5-.866l1.12.646-.237-.883a.5.5 0 0 1 .966-.258l.495 1.849.94.542-.236-.883a.5.5 0 0 1 .966-.258l.495 1.849 1.236.713V5.707L6.147 4.354a.5.5 0 1 1 .707-.708l.646.647V3.207L6.147 1.854a.5.5 0 1 1 .707-.708l.646.647V.5a.5.5 0 0 1 1 0v1.293l.647-.647a.5.5 0 1 1 .707.708L8.5 3.207v1.086l.647-.647a.5.5 0 1 1 .707.708L8.5 5.707v1.427l1.236-.713.495-1.85a.5.5 0 1 1 .966.26l-.236.882.94-.542.495-1.85a.5.5 0 1 1 .966.26l-.236.882 1.12-.646a.5.5 0 0 1 .5.866l-1.12.646.883.237a.5.5 0 1 1-.26.966l-1.848-.495-.94.542.883.237a.5.5 0 1 1-.26.966l-1.848-.495L9 8l1.236.713 1.849-.495a.5.5 0 0 1 .259.966l-.883.237.94.542 1.849-.495a.5.5 0 0 1 .259.966l-.883.237 1.12.646a.5.5 0 0 1-.5.866l-1.12-.646.236.883a.5.5 0 1 1-.966.258l-.495-1.849-.94-.542.236.883a.5.5 0 0 1-.966.258L9.736 9.58 8.5 8.866v1.427l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647v1.086l1.354 1.353a.5.5 0 0 1-.707.708l-.647-.647V15.5a.5.5 0 0 1-.5.5z" />
-                    </svg>
-                    <p id="snow"></p>
-                  </div>
-                  <div class="wind-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                      class="bi bi-wind" viewBox="0 0 16 16">
-                      <path
-                        d="M12.5 2A2.5 2.5 0 0 0 10 4.5a.5.5 0 0 1-1 0A3.5 3.5 0 1 1 12.5 8H.5a.5.5 0 0 1 0-1h12a2.5 2.5 0 0 0 0-5zm-7 1a1 1 0 0 0-1 1 .5.5 0 0 1-1 0 2 2 0 1 1 2 2h-5a.5.5 0 0 1 0-1h5a1 1 0 0 0 0-2zM0 9.5A.5.5 0 0 1 .5 9h10.042a3 3 0 1 1-3 3 .5.5 0 0 1 1 0 2 2 0 1 0 2-2H.5a.5.5 0 0 1-.5-.5z" />
-                    </svg>
-                    <p id="wind"></p>
-                  </div>
-                  <p id="sunrise"></p>
-                  <p id="sunset"></p>
-                </div>
-              </section>
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
-    </div>
-  </main>
-  <!-- Footer -->
-  <footer>
-    <h3>
-      All contents of this site, unless otherwise noted, are ©2023
-      In-it-to-win-it
-    </h3>
-  </footer>
-  <!-- Added link to sweetalert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    </main>
+    <!-- Footer -->
+    <footer>
+      <h3>
+        All contents of this site, unless otherwise noted, are ©2023
+        In-it-to-win-it
+      </h3>
+    </footer>
+    <!-- Added link to sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
-  <!-- Added link to the jQuery library and styling -->
-  <script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
-    integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U=" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-  <script src="./assets/js/script.js"></script>
-</body>
-
+    <!-- Added link to the jQuery library and styling -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
