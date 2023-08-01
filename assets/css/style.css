@@ -1,47 +1,29 @@
-body {
-  background-color: #193852;
-  font-family: sans-serif;
-  --backgroundBlue: #193852;
-  --lightBlue: #9bdbff;
-  --lightYellow: #ebc137;
-  --scrollbarBG: #193852;
-  --thumbBG: var(--lightYellow);
-}
-header {
-  /* font-size: 30px;
-  color: white; */
-  padding-top: 0%;
-  font-weight: bold;
-  background-color: rgb(230, 208, 149);
-  /* background-color:#FAF9F6; */
-
-  text-align: center;
-  box-shadow: 0px 0px 5px 0px #ffffff9e;
-}
-img.logo {
-  padding-top: 0px;
-  padding-bottom: 0px;
-  justify-content: center;
-}
-.backgroundImage {
-  background-size: cover;
-}
-#search-form {
-  margin-left: 25%;
-  margin-right: 45%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+.columns {
+  background-color: #5384d4;
+}
 .subheader {
   color: white;
   margin: 20px;
   text-align: center;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .button {
   font-size: 1rem;
-  background-color: var(--lightYellow);
   font-weight: bold;
+  color: #5384d4;
+  cursor: pointer;
+  width: 40%;
+}
+.button:hover {
+  background-color: #fafa11;
 }
 
 form {
@@ -50,12 +32,19 @@ form {
 }
 section {
   color: black;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .body-container {
   justify-content: center;
 }
 .input {
-  margin-right: 10px;
+  margin-right: 30px;
+  width: 20%;
+  cursor: pointer;
+}
+
+.input:hover {
+  box-shadow: 0 8px 8px #fafa11;
 }
 
 div.is-child {
@@ -72,6 +61,7 @@ section.is-child {
 .job-summary {
   max-height: 120px;
   cursor: pointer;
+  border: 1px solid #5384d4;
 
   > h3 {
     font-weight: bold;
@@ -85,21 +75,30 @@ section.is-child {
 .job-summary h3 {
   font-weight: bold;
 }
+p.title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  color: #326cc9;
+}
 
 .job-summary:hover {
   max-height: 120px;
-  background-color: #ebc137;
+  box-shadow: 0 8px 8px #fafa11;
   cursor: pointer;
+  color: #326cc9;
 }
 
 .is-child {
   background-color: #f5f5f5;
   border-radius: 0.375em;
+  border: 1px solid #5384d4;
 }
 
 #clicked-job {
-  background-color: #aac4d1;
   border-radius: 0.375em;
+  cursor: pointer;
+  border: 1px solid #5384d4;
 }
 
 .scroll-allowed {
@@ -116,7 +115,6 @@ footer {
   margin-top: auto;
 }
 
-/* Scroll jobs styling */
 .scroll-allowed::-webkit-scrollbar {
   width: 11px;
 }

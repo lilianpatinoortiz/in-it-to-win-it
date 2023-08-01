@@ -1,5 +1,5 @@
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551";
-let jobsAPIKey = "d7fcf0a6a7msha1676c0d9f63b5ap104558jsn4347a1655b29";
+let jobsAPIKey = "86f1766707msh0b1be0736150ae3p1a5ad9jsnd8eb00f19a27";
 let currentYear = dayjs().year();
 let endDateNotFormatted = new Date(currentYear, 0, 1);
 let endDate = endDateNotFormatted.toISOString().split("T")[0];

@@ -1,55 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Umbrella Job</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
-    />
-    <link rel="stylesheet" href="./assets/css/style.css" />
- 
-  </head>
-  <body>
-   
-    <div class="container-max-width header">
-      <header><img src="assets/images/logo.png" class="logo" /></header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Umbrella Job</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="./assets/css/initial.css" />
+</head>
+<body>
+  <div class="frontpage-container">
+    <img src="assets/images/logo.png" id="logo" />
+  </div>
+  <div class="columns">
+  <div class="column tile is- 4 ">
+      <form id="search-nav" class="px-1">
+        <input class="input tile is-6" id="keyword-input" type="text" placeholder="Keyword,Job title..." />
+        <input class="input tile is-6" id="city-input" type="text" placeholder="Country, City, or Remote..." />
+        <button id="search-button" class="button">Search</button>
+      </form>
     </div>
-    <!-- Body -->
-    <main>
-      <div id="container">
-        <div id="logo"></div>
-        <div id="search-bar" class="column tile is- 4">
-          <form id="search-form" class="px-1">
-            <input
-              id="keyword-input"
-              class="input tile is-6 "
-              type="text"
-              placeholder="Keyword..."
-            />
-            <input
-              id="city-input"
-              class="input tile is-6"
-              type="text"
-              placeholder="City..."
-            />
-            <input
-              id="country-input"
-              class="input tile is-6"
-              type="text"
-              placeholder="Country..."
-            />
-            <button id="search-button" class="button" > Search</button>
-          </form>
-        </div>
-      
-      </div>
-      <div id="search-image">
-        <img src="assets/images/backgroundImage.jpg" alt="people searching for job" class="backgroundImage">
+  </div>
+  <div id="search-image">
+    <img src="assets/images/backgroundImage.jpg" alt="people searching for job" class="backgroundImage" />
+  </div>
+  </main>
+  <script src="./assets/js/initial-script.js"></script>
+</body>
 
-      </div>
-    </main>
-    <script src="./assets/js/initial-script.js"></script>
-  </body>
 </html>
