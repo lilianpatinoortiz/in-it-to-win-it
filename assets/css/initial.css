@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img#logo {
+  margin-top: -5%;
+  margin-left: -50px;
+  width: 20%;
+}
+
+.frontpage-container {
+  height: 190px;
+  margin-bottom: -20px;
+  /*
+  border: 1px solid;
+  */
+}
+.columns {
+  background-color: #5384d4;
+  padding: 10px;
+}
+
+#search-nav {
+  margin-left: 25%;
+  margin-right: 45%;
+}
+form {
+  display: flex;
+  align-items: center;
+}
+
+form#search-nav.px-1 {
+  gap: 25px;
+  justify-content: space-between;
+  padding: 20px;
+}
+button#search-button {
+  color: #5384d4;
+  font-weight: bold;
+}
+
+button#search-button:hover {
+  background-color: #fafa11;
+  cursor: pointer;
+}
+input.input:hover {
+  color: #000;
+  cursor: pointer;
+  cursor: pointer;
+  box-shadow: 0 8px 8px #fafa11;
+}
