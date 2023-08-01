@@ -6,19 +6,10 @@ let endDate = endDateNotFormatted.toISOString().split("T")[0];
 let startDate = subtractYears(endDateNotFormatted, 1)
   .toISOString()
   .split("T")[0];
-let firstDayOfSpring = 80;
-let lastDayOfSpring = 173;
-let firstDayOfSummer = 174;
-let lastDayOfSummer = 267;
-let firstDayOfFall = 268;
-let lastDayOfFall = 357;
-let firstDayOfWinter = 358;
-let lastDayOfWinter = 365;
-let firstDayOfWinterOfYear = 0;
-let lastDayOfWinterOfYear = 79;
 
 var searchForm = document.querySelector("#search-form");
 var searchButtonElement = document.querySelector(".button");
+var localStorageArray = [];
 
 function subtractYears(date, years) {
   const dateCopy = new Date(date);
@@ -43,49 +34,67 @@ async function cityApiCall(location) {
   }
 }
 
-async function weatherApiCall(cityLat, cityLon) {
+async function weatherApiCall(cityLat, cityLon, cityName) {
   // 2. API call to get the weather of the year from the city selected
-  var url =
-    "https://archive-api.open-meteo.com/v1/archive?latitude=" +
-    cityLat +
-    "&longitude=" +
-    cityLon +
-    "&hourly=temperature_2m&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,rain_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max&temperature_unit=fahrenheit&windspeed_unit=ms&timezone=America%2FLos_Angeles" +
-    "&start_date=" +
-    startDate +
-    "&end_date=" +
-    endDate;
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    if (data) {
-      var allData = data.daily;
-      var ourData = {};
-      var springData = {};
-      var summerData = {};
-      var fallData = {};
-      var winterData = {};
 
-      function average(array) {
-        // get average in array of numbers
-        return array.reduce((x, y) => x + y) / array.length;
-      }
+  var indexCityInLocalStorage = doesCityAlreadyExists(
+    cityName,
+    localStorageArray
+  );
+  // if the city exists in local storage, we display the data from there, else call the api
+  if (indexCityInLocalStorage >= 0) {
+    showCityWeatherFromLocalStorage(indexCityInLocalStorage);
+  } else {
+    var url =
+      "https://archive-api.open-meteo.com/v1/archive?latitude=" +
+      cityLat +
+      "&longitude=" +
+      cityLon +
+      "&hourly=temperature_2m&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,rain_sum,snowfall_sum,windspeed_10m_max,windgusts_10m_max&temperature_unit=fahrenheit&windspeed_unit=ms&timezone=America%2FLos_Angeles" +
+      "&start_date=" +
+      startDate +
+      "&end_date=" +
+      endDate;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data) {
+        var allData = data.daily;
+        var ourData = {};
+        var springData = {};
+        var summerData = {};
+        var fallData = {};
+        var winterData = {};
+        let firstDayOfSpring = 80;
+        let lastDayOfSpring = 173;
+        let firstDayOfSummer = 174;
+        let lastDayOfSummer = 267;
+        let firstDayOfFall = 268;
+        let lastDayOfFall = 357;
+        let firstDayOfWinter = 358;
+        let lastDayOfWinter = 365;
+        let firstDayOfWinterOfYear = 0;
+        let lastDayOfWinterOfYear = 79;
 
-      for (var key in allData) {
-        if (key != "sunrise" && key != "sunset") {
-          if (key != "temperature_2m_max") {
+        function average(array) {
+          // get average in array of numbers
+          return array.reduce((x, y) => x + y) / array.length;
+        }
+
+        for (var key in allData) {
+          if (key != "sunrise" && key != "sunset") {
             springData[key] = Math.max.apply(
               Math,
               allData[key].slice(firstDayOfSpring, lastDayOfSpring)
-            ); // spring lasts 93 days - we take the average for rain, snow, temp and wind
+            ); // spring lasts ~93 days - we take the max for rain, snow and wind
             summerData[key] = Math.max.apply(
               Math,
               allData[key].slice(firstDayOfSummer, lastDayOfSummer)
-            ); // summer lasts 93 days - we take the average rain, snow, temp and wind
+            ); // summer lasts ~93 days - we take the max rain, snow and wind
             fallData[key] = Math.max.apply(
               Math,
               allData[key].slice(firstDayOfFall, lastDayOfFall)
-            ); // fall lasts 90 days - we take the average rain, snow, temp and wind
+            ); // fall lasts ~90 days - we take the max rain, snow and wind
             var winterArray = allData[key]
               .slice(firstDayOfWinter, lastDayOfWinter)
               .concat(
@@ -95,17 +104,18 @@ async function weatherApiCall(cityLat, cityLon) {
                 )
               );
             winterData[key] = Math.max.apply(Math, winterArray);
-            // winter lasts 88 days - we take the average rain, snow, temp and wind
+            // winter lasts ~88 days - we take the average for temperature
           } else {
-            springData[key] = average(
-              allData[key].slice(firstDayOfSpring, lastDayOfSpring)
-            ); // spring lasts 93 days - we take the average for rain, snow, temp and wind
-            summerData[key] = average(
-              allData[key].slice(firstDayOfSummer, lastDayOfSummer)
-            ); // summer lasts 93 days - we take the average rain, snow, temp and wind
-            fallData[key] = average(
-              allData[key].slice(firstDayOfFall, lastDayOfFall)
-            ); // fall lasts 90 days - we take the average rain, snow, temp and wind
+            // for sunrise and sunset, we get the median :)
+            springData[key] = allData[key]
+              .slice(firstDayOfSpring, lastDayOfSpring)[38]
+              .split("T")[1]; // spring lasts 93 days - we take the middle value
+            summerData[key] = allData[key]
+              .slice(firstDayOfSummer, lastDayOfSummer)[38]
+              .split("T")[1]; // summer lasts 93 days - we take the middle value
+            fallData[key] = allData[key]
+              .slice(firstDayOfFall, lastDayOfFall)[38]
+              .split("T")[1]; // fall lasts 90 days - we take the middle value
             var winterArray = allData[key]
               .slice(firstDayOfWinter, lastDayOfWinter)
               .concat(
@@ -114,36 +124,23 @@ async function weatherApiCall(cityLat, cityLon) {
                   lastDayOfWinterOfYear
                 )
               );
-            winterData[key] = average(winterArray); // winter lasts 88 days - we take the average rain, snow, temp and wind
+            winterData[key] = winterArray[38].split("T")[1]; // winter lasts 88 days - we take the middle value
           }
-        } else {
-          springData[key] = allData[key]
-            .slice(firstDayOfSpring, lastDayOfSpring)[38]
-            .split("T")[1]; // spring lasts 93 days - we take the middle value
-          summerData[key] = allData[key]
-            .slice(firstDayOfSummer, lastDayOfSummer)[38]
-            .split("T")[1]; // summer lasts 93 days - we take the middle value
-          fallData[key] = allData[key]
-            .slice(firstDayOfFall, lastDayOfFall)[38]
-            .split("T")[1]; // fall lasts 90 days - we take the middle value
-          var winterArray = allData[key]
-            .slice(firstDayOfWinter, lastDayOfWinter)
-            .concat(
-              allData[key].slice(firstDayOfWinterOfYear, lastDayOfWinterOfYear)
-            );
-          winterData[key] = winterArray[38].split("T")[1]; // winter lasts 88 days - we take the middle value
         }
+        ourData.spring = springData;
+        ourData.summer = summerData;
+        ourData.fall = fallData;
+        ourData.winter = winterData;
+        displayWeatherinUI(ourData);
+        // Update local storage
+        localStorageArray.push({ city: cityName, weather: ourData }); // save cities weather in local storage
+        localStorage.setItem("data", JSON.stringify(localStorageArray)); // convert the json to string to save it in local storage
+      } else {
+        console.log("Unable to get the weather");
       }
-      ourData.spring = springData;
-      ourData.summer = summerData;
-      ourData.fall = fallData;
-      ourData.winter = winterData;
-      displayWeatherinUI(ourData);
-    } else {
-      console.log("Unable to get the weather");
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
   }
 }
 
@@ -198,10 +195,10 @@ async function doApiCalls() {
     const cityData = await cityApiCall(location);
 
     // Call the weatherApiCall function with the location data
-    weatherApiCall(cityData.lat, cityData.lon);
+    weatherApiCall(cityData.lat, cityData.lon, cityData.name);
 
     // Perform the job search with the entered keyword and location
-    jobsApiCall(keyword, location);
+    //jobsApiCall(keyword, location);
   } catch (error) {
     console.error(error);
   }
@@ -279,7 +276,10 @@ function displayWeatherinUI(result) {
     // temperature
     var seasonDiv = document.querySelector("#weather-" + key);
     seasonDiv.querySelector("#temperature").textContent =
-      result[key].temperature_2m_max.toFixed(2) + " ℉";
+      result[key].temperature_2m_max.toFixed(2) +
+      " ℉ ~ " +
+      result[key].temperature_2m_min.toFixed(2) +
+      " ℉ ";
     // wmo (weather)
     seasonDiv.querySelector("#wmo-code").textContent =
       wmo[result[key].weathercode.toFixed()];
@@ -295,6 +295,31 @@ function displayWeatherinUI(result) {
 
     // sunrise and sunset
     const xValues = [sunrise, sunset];
+  }
+}
+
+// check if the weather exists in local storage array
+function doesCityAlreadyExists(city, array) {
+  function isKeyInArray(city, array) {
+    return array.findIndex((obj) => city == obj.city);
+  }
+  var indexInArray = isKeyInArray(city, array);
+  return indexInArray;
+}
+
+// save the weather in local storage
+function showCityWeatherFromLocalStorage(index) {
+  // display weather for the city found
+  displayWeatherinUI(localStorageArray[index].weather);
+}
+
+// get data from local storage
+function getLocalStorageData() {
+  var data = JSON.parse(localStorage.getItem("data")); // convert the string to json to use it
+  if (data) {
+    localStorageArray = data; // Update our array to be equals as the local storage one!
+  } else {
+    localStorage.setItem("data", JSON.stringify(localStorageArray));
   }
 }
 
@@ -321,6 +346,7 @@ async function getParams() {
 }
 
 getParams();
+getLocalStorageData();
 
 /* wmo code - source: https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM*/
 var wmo = {
