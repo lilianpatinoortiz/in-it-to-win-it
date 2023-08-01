@@ -7,6 +7,12 @@ function handleSearchFormSubmit(event) {
   var locationString = document.querySelector("#city-input").value;
 
   if (!keywordString || !locationString) {
+    Swal.fire({
+      text: "Unknown keyword or location, please retry!",
+      icon: "warning",
+      background: "white",
+      confirmButtonText: "Retry",
+    });
     console.error("You need a search input value!");
     return;
   }

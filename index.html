@@ -8,7 +8,10 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
     />
-    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
 
@@ -42,14 +45,18 @@
                 id="location-input"
                 class="input tile is-6"
                 type="text"
-                placeholder="Country, City, or Remote..."
+                placeholder="City, Country"
               />
               <button class="button">Search</button>
             </form>
           </div>
         </div>
         <!-- Jobs Section -->
-        <div class="tile is-ancestor">
+        <div
+          class="tile is-ancestor"
+          id="search-results"
+          style="visibility: hidden"
+        >
           <!-- Jobs List Section -->
           <section class="tile is-4 is-vertical">
             <div
@@ -63,9 +70,8 @@
               <div class="tile is-child" id="clicked-job">
                 <p class="title"></p>
                 <p></p>
-                <p class="description">
-                  <p> description :</p>
-                </p>
+                <p class="description"></p>
+                <p></p>
               </div>
             </div>
             <!-- Jobs Details - Weather Section -->
@@ -299,15 +305,8 @@
         </div>
       </div>
     </main>
-    <!-- Footer -->
-    <footer>
-      <h3>
-        All contents of this site, unless otherwise noted, are ©2023
-        In-it-to-win-it
-      </h3>
-    </footer>
-     <!-- Added link to sweetalert2 -->
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <!-- Added link to sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
 
     <!-- Added link to the jQuery library and styling -->
     <script

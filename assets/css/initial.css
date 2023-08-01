@@ -42,12 +42,12 @@ button#search-button {
 }
 
 button#search-button:hover {
-  background-color: #fafa11;
+  background-color: #f1d780;
   cursor: pointer;
 }
 input.input:hover {
   color: #000;
   cursor: pointer;
   cursor: pointer;
-  box-shadow: 0 8px 8px #fafa11;
+  box-shadow: 0 8px 8px #f1d780;
 }

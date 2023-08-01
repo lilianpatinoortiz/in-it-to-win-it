@@ -31,6 +31,12 @@ async function cityApiCall(location) {
     return data[0];
   } catch (error) {
     console.error(error);
+    Swal.fire({
+      text: "Unable to get the weather",
+      icon: "error",
+      background: "white",
+      confirmButtonText: "Retry",
+    });
   }
 }
 
@@ -137,9 +143,24 @@ async function weatherApiCall(cityLat, cityLon, cityName) {
         localStorage.setItem("data", JSON.stringify(localStorageArray)); // convert the json to string to save it in local storage
       } else {
         console.log("Unable to get the weather");
+        Swal.fire({
+          text: "Unable to get the weather",
+          icon: "error",
+          background: "white",
+          confirmButtonText: "Retry",
+        });
       }
     } catch (error) {
       console.error(error);
+      Swal.fire({
+        text: "There was an error with the API, Please retry!",
+        icon: "error",
+        background: "white",
+        confirmButtonText: "Retry",
+      }).then((result) => {
+        var locQueryUrl = "./initial.html";
+        document.location.href = locQueryUrl;
+      });
     }
   }
 }
@@ -168,10 +189,25 @@ async function jobsApiCall(keyword, cityState) {
     displayJobListInformation(result.data);
   } catch (error) {
     console.error(error);
+    Swal.fire({
+      text: "There was an error with the Job API, Please retry!",
+      icon: "error",
+      background: "white",
+      confirmButtonText: "Retry",
+    }).then((result) => {
+      var locQueryUrl = "./initial.html";
+      document.location.href = locQueryUrl;
+    });
   }
 }
 
 async function doApiCalls() {
+  Swal.fire({
+    text: "Please wait, we are getting your search...",
+    icon: "info",
+    background: "white",
+    confirmButtonText: "Ok",
+  });
   // Get the values entered in the keyword and location input fields
   var keyword = document.getElementById("keyword-input").value.trim();
   var location = document.getElementById("location-input").value.trim();
@@ -182,25 +218,35 @@ async function doApiCalls() {
   // Check if either keyword or location is empty
   if (!keyword || !location) {
     Swal.fire({
-      title: 'Error!',
-      text: 'Unknown keyword or location, Please retry!',
-      icon: 'error',
+      text: "Unknown keyword or location, please retry!",
+      icon: "warning",
       background: "white",
-      confirmButtonText: 'Retry'
-    })
-    return;
-  }
-  try {
-    // Get the latitude, longitude, and state of the location
-    const cityData = await cityApiCall(location);
-
-    // Call the weatherApiCall function with the location data
-    weatherApiCall(cityData.lat, cityData.lon, cityData.name);
-
-    // Perform the job search with the entered keyword and location
-    //jobsApiCall(keyword, location);
-  } catch (error) {
-    console.error(error);
+      confirmButtonText: "Retry",
+    }).then((result) => {
+      var locQueryUrl = "./initial.html";
+      document.location.href = locQueryUrl;
+    });
+  } else {
+    try {
+      // Get the latitude, longitude, and state of the location
+      const cityData = await cityApiCall(location);
+      // Call the weatherApiCall function with the location data
+      weatherApiCall(cityData.lat, cityData.lon, cityData.name);
+      // Perform the job search with the entered keyword and location
+      jobsApiCall(keyword, location);
+    } catch (error) {
+      console.error(error);
+      Swal.fire({
+        text: "There was an error with the API, Please retry!",
+        icon: "error",
+        background: "white",
+        confirmButtonText: "Retry",
+      }).then((result) => {
+        var locQueryUrl = "./initial.html";
+        document.location.href = locQueryUrl;
+      });
+      return;
+    }
   }
 }
 
@@ -208,19 +254,16 @@ async function doApiCalls() {
 var jobLiEl = document.querySelector("#new-jobs");
 
 function displayJobListInformation(result) {
-  console.log(result);
-
   for (i = 0; i < result.length; i++) {
     const newJobs = document.createElement("div");
 
     // each new job when clicked, will grab which index it is in the list cards
     // and then call loadBigCard passing in the index needed to load that little card
     // as well as the results from the api so that we can grab its data
-    newJobs.addEventListener("click", function(){
-      const index = newJobs.classList[3].slice(5)
-      console.log(index);
+    newJobs.addEventListener("click", function () {
+      const index = newJobs.classList[3].slice(5);
       loadBigCard(result, index);
-    })
+    });
     // if no click have happened, default to showing the first card as the large one
     loadBigCard(result, 0);
     const compName = document.createElement("h3");
@@ -251,18 +294,25 @@ function displayJobListInformation(result) {
     } else {
       type.textContent = "Type: " + result[i].job_employment_type;
     }
-// data-${i} is added to track which index we want
-    newJobs.className = `tile is-child job-summary data-${i}` ;
+    // data-${i} is added to track which index we want
+    newJobs.className = `tile is-child job-summary data-${i} default-job`;
     compName.className = "is-underlined";
-
     jobLiEl.appendChild(newJobs);
     newJobs.appendChild(compName);
     newJobs.appendChild(jobTitle);
     newJobs.appendChild(salary);
     newJobs.appendChild(type);
   }
-  // taking the needed data, and appending it to our big card
+  Swal.fire({
+    text: "Search completed!",
+    icon: "success",
+    background: "white",
+    confirmButtonText: "Go",
+  }).then((result) => {
+    document.getElementById("search-results").style.visibility = "visible";
+  });
 }
+// load the information in the description box
 function loadBigCard(result, index) {
   const data = result[index];
   const title = document.querySelector(".title");
@@ -271,6 +321,7 @@ function loadBigCard(result, index) {
   description.innerHTML = data.job_description;
 }
 
+// display the weather in the ui
 function displayWeatherinUI(result) {
   for (var key in result) {
     // temperature
@@ -349,6 +400,7 @@ getParams();
 getLocalStorageData();
 
 /* wmo code - source: https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM*/
+// code for the weather of the season
 var wmo = {
   0: "Clear sky",
   1: "Mainly clear",

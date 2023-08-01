@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
 }
 
 .columns {
@@ -23,7 +26,7 @@
   width: 40%;
 }
 .button:hover {
-  background-color: #fafa11;
+  background-color: #f1d780;
 }
 
 form {
@@ -44,7 +47,7 @@ section {
 }
 
 .input:hover {
-  box-shadow: 0 8px 8px #fafa11;
+  box-shadow: 0 8px 8px #f1d780;
 }
 
 div.is-child {
@@ -61,7 +64,7 @@ section.is-child {
 .job-summary {
   max-height: 120px;
   cursor: pointer;
-  border: 1px solid #5384d4;
+  border: 2px solid #5384d4;
 
   > h3 {
     font-weight: bold;
@@ -84,7 +87,7 @@ p.title {
 
 .job-summary:hover {
   max-height: 120px;
-  box-shadow: 0 8px 8px #fafa11;
+  box-shadow: 0 6px 10px #f1d780;
   cursor: pointer;
   color: #326cc9;
 }
@@ -92,13 +95,13 @@ p.title {
 .is-child {
   background-color: #f5f5f5;
   border-radius: 0.375em;
-  border: 1px solid #5384d4;
+  border: 2px solid #5384d4;
 }
 
 #clicked-job {
   border-radius: 0.375em;
   cursor: pointer;
-  border: 1px solid #5384d4;
+  border: 2px solid #5384d4;
 }
 
 .scroll-allowed {
@@ -131,7 +134,17 @@ footer {
   border: 3px solid var(--scrollbarBG);
 }
 
-/* Weather temporary styliing */
+.active-job {
+  background-color: #ffe08a;
+}
+.default-job {
+  background-color: white;
+}
+.description {
+  margin: 20px;
+}
+
+/* Weather styling */
 .weather {
   margin: 20px;
 }
