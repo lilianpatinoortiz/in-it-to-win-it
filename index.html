@@ -1,33 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Umbrella Job</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/initial.css" />
-</head>
-<body>
-  <div class="frontpage-container">
-    <img src="assets/images/logo.png" id="logo" />
-  </div>
-  <div class="columns">
-  <div class="column tile is- 4 ">
-      <form id="search-nav" class="px-1">
-        <input class="input tile is-6" id="keyword-input" type="text" placeholder="Keyword,Job title..." />
-        <input class="input tile is-6" id="city-input" type="text" placeholder="Country, City, or Remote..." />
-        <button id="search-button" class="button">Search</button>
-      </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Umbrella Job</title>
+    <!-- Link to Bulma CSS framework -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <!-- Link to dark theme for SweetAlert2 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome kit for icons -->
+    <script
+      src="https://kit.fontawesome.com/653016226d.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./assets/css/initial.css" />
+  </head>
+  <body>
+    <!-- Frontpage Container -->
+    <div class="frontpage-container">
+      <!-- Umbrella Job Logo -->
+      <img src="assets/images/logo.png" id="logo" />
     </div>
-  </div>
-  <div id="search-image">
-    <img src="assets/images/backgroundImage.jpg" alt="people searching for job" class="backgroundImage" />
-  </div>
-  </main>
-   <!-- Added link to sweetalert2 -->
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-  <script src="./assets/js/index-script.js"></script>
-</body>
-
+    <!-- Search Section on first page -->
+    <div class="columns">
+      <div class="column tile is- 4">
+        <!-- Search form in the navigation section -->
+        <form id="search-nav" class="px-1">
+          <input
+            class="input tile is-6"
+            id="keyword-input"
+            type="text"
+            placeholder="Keyword,Job title..."
+          />
+          <input
+            class="input tile is-6"
+            id="city-input"
+            type="text"
+            placeholder="Country, City, or Remote..."
+          />
+          <button id="search-button" class="button">Search</button>
+        </form>
+      </div>
+    </div>
+    <div id="search-image">
+      <!-- Background image showing people searching for a job -->
+      <img
+        src="assets/images/backgroundImage.jpg"
+        alt="people searching for job"
+        class="backgroundImage"
+      />
+    </div>
+    <!-- Added link to sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
+    <script src="./assets/js/index-script.js"></script>
+  </body>
 </html>
