@@ -1,5 +1,5 @@
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551";
-let jobsAPIKey = "86f1766707msh0b1be0736150ae3p1a5ad9jsnd8eb00f19a27";
+let jobsAPIKey = "d278f0c01bmsh88c97343fc232c2p193608jsn5bdd6876a37c";
 let currentYear = dayjs().year();
 let endDateNotFormatted = new Date(currentYear, 0, 1);
 let endDate = endDateNotFormatted.toISOString().split("T")[0];
@@ -19,7 +19,7 @@ let lastDayOfWinterOfYear = 79;
 
 var searchForm = document.querySelector("#search-form");
 var searchButtonElement = document.querySelector(".button");
-var applyButton = document.querySelector(".apply-button");
+var applyButton = document.querySelector("apply-button");
 
 function subtractYears(date, years) {
   const dateCopy = new Date(date);
@@ -221,6 +221,13 @@ function displayJobListInformation(result) {
     // and then call loadBigCard passing in the index needed to load that little card
     // as well as the results from the api so that we can grab its data
     newJobs.addEventListener("click", function () {
+      const allJobListings = document.querySelectorAll(".job-summary");
+      allJobListings.forEach((jobListing) => {
+        newJobs.classList.backgroundColor = "";
+      });
+
+
+
       const index = newJobs.classList[3].slice(5)
       console.log(index);
       loadBigCard(result, index);
@@ -258,17 +265,6 @@ function displayJobListInformation(result) {
     // data-${i} is added to track which index we want
     newJobs.className = `tile is-child job-summary data-${i}`;
     compName.className = "is-underlined";
-
-    applyButton.addEventListener("click", function () {
-      if (result[i]) {
-        window.open(result[i].job_apply_link, '_blank');
-      }
-      else {
-        console.log("no data found ", result[i])
-      }
-
-    })
-    document.querySelector("#clicked-job").appendChild(applyButton)
 
     jobLiEl.appendChild(newJobs);
     newJobs.appendChild(compName);
