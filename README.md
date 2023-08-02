@@ -5,7 +5,7 @@
 ## desciption
 
 Umbrella Job aims to assist job seekers in finding their dream job opportunities in their current location or desired locations worldwide, while staying informed about weather conditions in their desired locations throughout the year.
-
+  
 ## usage
 
 - Job Search Functionality
@@ -18,3 +18,24 @@ Umbrella Job aims to assist job seekers in finding their dream job opportunities
 ## source code
 
 Source code in assets
+
+## Installation
+
+To run the project in your local machine:
+
+1. Open visual studio in your computer or laptop
+2. Clone the git project: https://github.com/lilianpatinoortiz/in-it-to-win-it
+3. Pull the latest from the 'main' branch
+4. Locate the index.html file
+5. Right click on the file and select "Open in default browser"
+6. A new window on your default browser should open with the web page containing the prework study guide
+
+Access the deployed project here: https://lilianpatinoortiz.github.io/in-it-to-win-it/
+
+## Credits
+
+Group 09 
+
+## License
+
+Please refer to the LICENSE in the repo.
