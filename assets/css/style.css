@@ -1,3 +1,4 @@
+/* Apply default styles to all elements */
 * {
   margin: 0;
   padding: 0;
@@ -6,10 +7,11 @@
     Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica,
     Arial, sans-serif;
 }
-
+/* Styling for the upper background section */
 .columns {
   background-color: #5384d4;
 }
+/* Styling for subheader */
 .subheader {
   color: white;
   margin: 20px;
@@ -17,7 +19,7 @@
   font-weight: bold;
   font-size: 20px;
 }
-
+/* Styling for buttons */
 .button {
   font-size: 1rem;
   font-weight: bold;
@@ -25,6 +27,7 @@
   cursor: pointer;
   width: 40%;
 }
+/* Styling for buttons on hover change color*/
 .button:hover {
   background-color: #f1d780;
 }
@@ -33,6 +36,7 @@ form {
   display: flex;
   align-items: center;
 }
+/* Styling for job sections */
 section {
   color: black;
   font-family: Arial, Helvetica, sans-serif;
@@ -40,12 +44,13 @@ section {
 .body-container {
   justify-content: center;
 }
+/* Styling for input section */
 .input {
   margin-right: 30px;
   width: 20%;
   cursor: pointer;
 }
-
+/* Styling for input section on hover */
 .input:hover {
   box-shadow: 0 8px 8px #f1d780;
 }
@@ -60,7 +65,7 @@ section.is-child {
 .body-container {
   margin: 20px;
 }
-
+/* Styling for job-summary */
 .job-summary {
   max-height: 120px;
   cursor: pointer;
@@ -78,13 +83,14 @@ section.is-child {
 .job-summary h3 {
   font-weight: bold;
 }
+/* Styling for title paragraphs */
 p.title {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   font-size: 30px;
   color: #326cc9;
 }
-
+/* Styling for job-summary class on hover */
 .job-summary:hover {
   max-height: 120px;
   box-shadow: 0 6px 10px #f1d780;
@@ -97,7 +103,7 @@ p.title {
   border-radius: 0.375em;
   border: 2px solid #5384d4;
 }
-
+/* Styling for job list section */
 #clicked-job {
   border-radius: 0.375em;
   cursor: pointer;
@@ -173,9 +179,14 @@ footer {
 }
 #wmo-code {
   margin-bottom: 10px;
-  background-color: #00d1b269;
+  background-color: #9becfc;
   border-radius: 15px;
   text-align: center;
+  font-weight: bold;
   width: fit-content;
   padding: 7px;
+}
+
+.active {
+  background-color: #f1d780;
 }

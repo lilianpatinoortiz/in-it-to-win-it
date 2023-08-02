@@ -1,5 +1,5 @@
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551";
-let jobsAPIKey = "86f1766707msh0b1be0736150ae3p1a5ad9jsnd8eb00f19a27";
+let jobsAPIKey = "d278f0c01bmsh88c97343fc232c2p193608jsn5bdd6876a37c";
 let currentYear = dayjs().year();
 let endDateNotFormatted = new Date(currentYear, 0, 1);
 let endDate = endDateNotFormatted.toISOString().split("T")[0];
@@ -260,12 +260,16 @@ function displayJobListInformation(result) {
     // each new job when clicked, will grab which index it is in the list cards
     // and then call loadBigCard passing in the index needed to load that little card
     // as well as the results from the api so that we can grab its data
-    newJobs.addEventListener("click", function () {
+    newJobs.addEventListener("click", function (event) {
+      const allJobListings = document.querySelectorAll(".job-summary");
+      allJobListings.forEach((jobListing) => {
+        jobListing.classList.remove("active");
+      });
+      newJobs.classList.add("active");
       const index = newJobs.classList[3].slice(5);
       loadBigCard(result, index);
     });
     // if no click have happened, default to showing the first card as the large one
-    loadBigCard(result, 0);
     const compName = document.createElement("h3");
     const jobTitle = document.createElement("li");
     const salary = document.createElement("li");
@@ -295,13 +299,15 @@ function displayJobListInformation(result) {
       type.textContent = "Type: " + result[i].job_employment_type;
     }
     // data-${i} is added to track which index we want
-    newJobs.className = `tile is-child job-summary data-${i} default-job`;
+
+    newJobs.className = `tile is-child job-summary data-${i}`;
     compName.className = "is-underlined";
     jobLiEl.appendChild(newJobs);
     newJobs.appendChild(compName);
     newJobs.appendChild(jobTitle);
     newJobs.appendChild(salary);
     newJobs.appendChild(type);
+    loadBigCard(result, 0);
   }
   Swal.fire({
     text: "Search completed!",
@@ -319,6 +325,8 @@ function loadBigCard(result, index) {
   const description = document.querySelector(".description");
   title.innerHTML = data.employer_name;
   description.innerHTML = data.job_description;
+  var jobSelected = document.querySelector(".data-" + index);
+  jobSelected.classList.add("active");
 }
 
 // display the weather in the ui
@@ -327,10 +335,7 @@ function displayWeatherinUI(result) {
     // temperature
     var seasonDiv = document.querySelector("#weather-" + key);
     seasonDiv.querySelector("#temperature").textContent =
-      result[key].temperature_2m_max.toFixed(2) +
-      " ℉ ~ " +
-      result[key].temperature_2m_min.toFixed(2) +
-      " ℉ ";
+      result[key].temperature_2m_max.toFixed(2) + " ℉ ";
     // wmo (weather)
     seasonDiv.querySelector("#wmo-code").textContent =
       wmo[result[key].weathercode.toFixed()];
