@@ -1,5 +1,5 @@
 let weatherAPIKey = "6f71590911e8c3802b29fe6c49229551";
-let jobsAPIKey = "d278f0c01bmsh88c97343fc232c2p193608jsn5bdd6876a37c";
+let jobsAPIKey = "db8ff45c2fmshc489c3c6efe0714p162abdjsn055276f863b1";
 let currentYear = dayjs().year();
 let endDateNotFormatted = new Date(currentYear, 0, 1);
 let endDate = endDateNotFormatted.toISOString().split("T")[0];
@@ -11,6 +11,7 @@ var searchForm = document.querySelector("#search-form");
 var searchButtonElement = document.querySelector(".button");
 var localStorageArray = [];
 
+// function to substract a year to the date sent
 function subtractYears(date, years) {
   const dateCopy = new Date(date);
   dateCopy.setFullYear(date.getFullYear() - years);
@@ -82,67 +83,39 @@ async function weatherApiCall(cityLat, cityLon, cityName) {
         let firstDayOfWinterOfYear = 0;
         let lastDayOfWinterOfYear = 79;
 
-        function average(array) {
-          // get average in array of numbers
-          return array.reduce((x, y) => x + y) / array.length;
-        }
-
         for (var key in allData) {
-          if (key != "sunrise" && key != "sunset") {
-            springData[key] = Math.max.apply(
-              Math,
-              allData[key].slice(firstDayOfSpring, lastDayOfSpring)
-            ); // spring lasts ~93 days - we take the max for rain, snow and wind
-            summerData[key] = Math.max.apply(
-              Math,
-              allData[key].slice(firstDayOfSummer, lastDayOfSummer)
-            ); // summer lasts ~93 days - we take the max rain, snow and wind
-            fallData[key] = Math.max.apply(
-              Math,
-              allData[key].slice(firstDayOfFall, lastDayOfFall)
-            ); // fall lasts ~90 days - we take the max rain, snow and wind
-            var winterArray = allData[key]
-              .slice(firstDayOfWinter, lastDayOfWinter)
-              .concat(
-                allData[key].slice(
-                  firstDayOfWinterOfYear,
-                  lastDayOfWinterOfYear
-                )
-              );
-            winterData[key] = Math.max.apply(Math, winterArray);
-            // winter lasts ~88 days - we take the average for temperature
-          } else {
-            // for sunrise and sunset, we get the median :)
-            springData[key] = allData[key]
-              .slice(firstDayOfSpring, lastDayOfSpring)[38]
-              .split("T")[1]; // spring lasts 93 days - we take the middle value
-            summerData[key] = allData[key]
-              .slice(firstDayOfSummer, lastDayOfSummer)[38]
-              .split("T")[1]; // summer lasts 93 days - we take the middle value
-            fallData[key] = allData[key]
-              .slice(firstDayOfFall, lastDayOfFall)[38]
-              .split("T")[1]; // fall lasts 90 days - we take the middle value
-            var winterArray = allData[key]
-              .slice(firstDayOfWinter, lastDayOfWinter)
-              .concat(
-                allData[key].slice(
-                  firstDayOfWinterOfYear,
-                  lastDayOfWinterOfYear
-                )
-              );
-            winterData[key] = winterArray[38].split("T")[1]; // winter lasts 88 days - we take the middle value
-          }
+          springData[key] = Math.max.apply(
+            Math,
+            allData[key].slice(firstDayOfSpring, lastDayOfSpring)
+          ); // spring lasts ~93 days - we take the max for rain, snow and wind
+          summerData[key] = Math.max.apply(
+            Math,
+            allData[key].slice(firstDayOfSummer, lastDayOfSummer)
+          ); // summer lasts ~93 days - we take the max rain, snow and wind
+          fallData[key] = Math.max.apply(
+            Math,
+            allData[key].slice(firstDayOfFall, lastDayOfFall)
+          ); // fall lasts ~90 days - we take the max rain, snow and wind
+          var winterArray = allData[key]
+            .slice(firstDayOfWinter, lastDayOfWinter)
+            .concat(
+              allData[key].slice(firstDayOfWinterOfYear, lastDayOfWinterOfYear)
+            );
+          winterData[key] = Math.max.apply(Math, winterArray);
+          // winter lasts ~88 days - we take the average for temperature
         }
         ourData.spring = springData;
         ourData.summer = summerData;
         ourData.fall = fallData;
         ourData.winter = winterData;
+        // display the weather in the interface
         displayWeatherinUI(ourData);
         // Update local storage
         localStorageArray.push({ city: cityName, weather: ourData }); // save cities weather in local storage
         localStorage.setItem("data", JSON.stringify(localStorageArray)); // convert the json to string to save it in local storage
       } else {
         console.log("Unable to get the weather");
+        // show sweetalert
         Swal.fire({
           text: "Unable to get the weather",
           icon: "error",
@@ -152,12 +125,14 @@ async function weatherApiCall(cityLat, cityLon, cityName) {
       }
     } catch (error) {
       console.error(error);
+      // show sweetalert
       Swal.fire({
         text: "There was an error with the API, Please retry!",
         icon: "error",
         background: "white",
         confirmButtonText: "Retry",
       }).then((result) => {
+        // we redirect to the initial page, so the user can do the search again
         var locQueryUrl = "./index.html";
         document.location.href = locQueryUrl;
       });
@@ -189,6 +164,7 @@ async function jobsApiCall(keyword, cityState) {
     displayJobListInformation(result.data);
   } catch (error) {
     console.error(error);
+    // show sweetalert
     Swal.fire({
       text: "There was an error with the Job API, Please retry!",
       icon: "error",
@@ -200,7 +176,7 @@ async function jobsApiCall(keyword, cityState) {
     });
   }
 }
-
+// All 3 api calls are handled in this function
 async function doApiCalls() {
   Swal.fire({
     text: "Please wait, we are getting your search...",
@@ -212,9 +188,6 @@ async function doApiCalls() {
   var keyword = document.getElementById("keyword-input").value.trim();
   var location = document.getElementById("location-input").value.trim();
 
-  console.log("keyword: " + keyword);
-  console.log("location: " + location);
-
   // Check if either keyword or location is empty
   if (!keyword || !location) {
     Swal.fire({
@@ -223,6 +196,7 @@ async function doApiCalls() {
       background: "white",
       confirmButtonText: "Retry",
     }).then((result) => {
+      // we redirect to the initial page if there is no keyword or location
       var locQueryUrl = "./index.html";
       document.location.href = locQueryUrl;
     });
@@ -236,12 +210,14 @@ async function doApiCalls() {
       jobsApiCall(keyword, location);
     } catch (error) {
       console.error(error);
+      // show sweetalert
       Swal.fire({
         text: "There was an error with the API, Please retry!",
         icon: "error",
         background: "white",
         confirmButtonText: "Retry",
       }).then((result) => {
+        // we redirect to the main page if there was an error with the api
         var locQueryUrl = "./index.html";
         document.location.href = locQueryUrl;
       });
@@ -309,6 +285,7 @@ function displayJobListInformation(result) {
     newJobs.appendChild(type);
     loadBigCard(result, 0);
   }
+  // show sweetalert
   Swal.fire({
     text: "Search completed!",
     icon: "success",
@@ -391,6 +368,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// if we come from the initial page or the parameters were changed in the url, we get them and call the api
 async function getParams() {
   console.log(">>> Redirected from index page");
   const urlParams = new URLSearchParams(window.location.search);
@@ -401,6 +379,7 @@ async function getParams() {
   doApiCalls();
 }
 
+// initial calls, we get the parameters and we get the local storage data
 getParams();
 getLocalStorageData();
 
