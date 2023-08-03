@@ -28,7 +28,7 @@ To run the project in your local machine:
 3. Pull the latest from the 'main' branch
 4. Locate the index.html file
 5. Right click on the file and select "Open in default browser"
-6. A new window on your default browser should open with the web page containing the prework study guide
+6. A new window on your default browser should open with the web page containing the project
 
 Access the deployed project here: https://lilianpatinoortiz.github.io/in-it-to-win-it/
 
