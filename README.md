@@ -5,7 +5,7 @@
 ## desciption
 
 Umbrella Job aims to assist job seekers in finding their dream job opportunities in their current location or desired locations worldwide, while staying informed about weather conditions in their desired locations throughout the year.
-  
+
 ## usage
 
 - Job Search Functionality
@@ -34,8 +34,16 @@ Access the deployed project here: https://lilianpatinoortiz.github.io/in-it-to-w
 
 ## Credits
 
-Group 09 
+Group 09
 
 ## License
 
 Please refer to the LICENSE in the repo.
+
+## Acceptance Criteria
+
+- Given a user wants to use the job search application
+- When the user searches for jobs using keywords, location, or industry filters
+- Then a list of relevant job openings with the job title, company name, type, and salary will be displayed AND weather data forecast will be displayed as well
+- When the user clicks on a specific job listing
+- Then the full job description for that companies role is shown.
